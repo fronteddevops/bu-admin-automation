@@ -1,0 +1,45 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+# .env
+# .env.*.local
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sw?
+
+# Selenium WebDriver downloads
+chromedriver
+geckodriver
+selenium-debug.log
+
+# Test results/output
+test-output/
+reports/
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+
+# Build artifacts (if using a build step)
+dist/
+build/
+
+# Optional: ignore screenshots or videos (if you're capturing test failures)
+screenshots/
+videos/
