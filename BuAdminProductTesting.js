@@ -1710,7 +1710,6 @@ const os = require("os");
     await memberInput.sendKeys("3");
 
     // enter price
-
     const priceInput = await driver.wait(
       until.elementLocated(By.css("input#MaxPrice")),
       10000

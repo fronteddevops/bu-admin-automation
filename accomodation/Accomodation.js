@@ -1656,7 +1656,7 @@ const os = require("os");
     );
 
     await dateInputdata.click();
-    await dateInputdata.sendKeys("2025-07-01");
+    await dateInputdata.sendKeys("01-07-2025");
 
     // end date
 
@@ -1673,7 +1673,7 @@ const os = require("os");
     );
 
     await enddateInputdata.click();
-    await enddateInputdata.sendKeys("2025-12-01");
+    await enddateInputdata.sendKeys("01-12-2025");
 
     // click on description
 
@@ -1727,22 +1727,155 @@ const os = require("os");
 
     await priceInput.sendKeys("25450");
 
-    const saveButtonses = await driver.wait(
+    console.log("alertchecking............");
+
+    // const saveButtonses = await driver.wait(
+    //   until.elementLocated(
+    //     By.xpath(
+    //       "//button[contains(@class, 'modal-success-button') and text()='Save']"
+    //     )
+    //   ),
+    //   10000
+    // );
+
+    // await driver.wait(until.elementIsVisible(saveButtonses), 5000);
+    // await driver.executeScript(
+    //   "arguments[0].scrollIntoView({block: 'center'});",
+    //   saveButtonses
+    // );
+
+    // await saveButtonses.click();
+    // const saveButtonsession = await driver.wait(
+    //     until.elementLocated(By.css("button.modal-success-button")),
+    //     10000 // timeout in milliseconds
+    //   );
+
+    //   console.log
+
+    //   await driver.wait(until.elementIsVisible(saveButtonsession), 5000);
+    //   await driver.wait(until.elementIsEnabled(saveButtonsession), 5000);
+    //   await saveButtonsession.click();
+    const saveButtonq = await driver.findElement(
+      By.xpath(
+        '//div[contains(@class, "modal-footer")]//button[contains(@class, "modal-success-button") and text()="Save"]'
+      )
+    );
+    // const buttonText = await saveButtonq.getText(); // Get button's visible text
+    await saveButtonq.click();
+
+    const closeButtonmodal = await driver.findElement(
+      By.xpath('//button[@class="btn-close" and @aria-label="Close"]')
+    );
+    console.log("closeButtonmodal", closeButtonmodal);
+    await closeButtonmodal.click();
+
+    const saveNxtButton = await driver.wait(
+      until.elementLocated(By.css("button.save-and-next-button")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(saveNxtButton), 5000);
+    await driver.wait(until.elementIsEnabled(saveNxtButton), 5000);
+
+    // Click the button
+    await saveNxtButton.click();
+    await driver.sleep(2000);
+    // click on Add Task
+
+    const addTasksBtn = await driver.wait(
+      until.elementLocated(By.xpath('//button[text()="Add Tasks"]')),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(addTasksBtn), 5000);
+    await driver.wait(until.elementIsEnabled(addTasksBtn), 5000);
+
+    await addTasksBtn.click();
+
+    // Add Title
+    await driver.sleep(2000);
+    const addtitleInput = await driver.wait(
+      until.elementLocated(By.xpath('//input[@placeholder="enter title"]')),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(addtitleInput), 5000);
+    await driver.wait(until.elementIsEnabled(addtitleInput), 5000);
+
+    await addtitleInput.click();
+    await addtitleInput.clear();
+    await addtitleInput.sendKeys("Your Task Title Here");
+
+    // add description
+    await driver.sleep(2000);
+    const descriptionBox = await driver.wait(
+      until.elementLocated(By.id("description")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(descriptionBox), 5000);
+    await driver.wait(until.elementIsEnabled(descriptionBox), 5000);
+
+    await descriptionBox.click();
+    await descriptionBox.clear();
+    await descriptionBox.sendKeys("Your task description goes here");
+    await driver.sleep(2000);
+
+    // Start Time
+
+    const startTimeInput = await driver.wait(
+      until.elementLocated(By.id("start-time")),
+      10000
+    );
+
+    await driver.sleep(2000);
+
+    await driver.wait(until.elementIsVisible(startTimeInput), 5000);
+    await driver.wait(until.elementIsEnabled(startTimeInput), 5000);
+
+    await startTimeInput.click();
+    await startTimeInput.clear(); //
+    await driver.sleep(2000);
+    await startTimeInput.sendKeys("04:50");
+
+    // click on save button
+
+    const saveButtonTask = await driver.wait(
+      until.elementLocated(By.xpath('//button[text()="Save"]')),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(saveButtonTask), 5000);
+    await driver.wait(until.elementIsEnabled(saveButtonTask), 5000);
+
+    await saveButtonTask.click();
+
+    // click to save and next
+
+    const saveNextButtontask = await driver.wait(
       until.elementLocated(
-        By.xpath(
-          "//button[contains(@class, 'modal-success-button') and text()='Save']"
-        )
+        By.xpath('//button[normalize-space()="Save and Next"]')
       ),
       10000
     );
 
-    await driver.wait(until.elementIsVisible(saveButtonses), 5000);
-    await driver.executeScript(
-      "arguments[0].scrollIntoView({block: 'center'});",
-      saveButtonses
+    await driver.wait(until.elementIsVisible(saveNextButtontask), 5000);
+    await driver.wait(until.elementIsEnabled(saveNextButtontask), 5000);
+
+    await saveNextButtontask.click();
+
+    // faq save and next
+    const saveNextButtonFaq = await driver.wait(
+      until.elementLocated(
+        By.xpath('//button[normalize-space()="Save and Next"]')
+      ),
+      10000
     );
 
-    await saveButtonses.click();
+    await driver.wait(until.elementIsVisible(saveNextButtonFaq), 5000);
+    await driver.wait(until.elementIsEnabled(saveNextButtonFaq), 5000);
+
+    await saveNextButtonFaq.click();
   } finally {
   }
 })();
