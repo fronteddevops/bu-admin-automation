@@ -1726,6 +1726,8 @@ const os = require("os");
 
     await priceInput.sendKeys("25450");
 
+    console.log("new")
+
     const saveButtonses = await driver.wait(
       until.elementLocated(
         By.xpath(
@@ -1735,6 +1737,8 @@ const os = require("os");
       10000
     );
 
+    console.log("alert")
+
     await driver.wait(until.elementIsVisible(saveButtonses), 5000);
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
@@ -1742,6 +1746,76 @@ const os = require("os");
     );
 
     await saveButtonses.click();
+
+
+    console.log("ddddddddddfeffffffffff")
+
+    // Wait for alert to appear
+await driver.wait(until.alertIsPresent(), 5000);
+
+// Switch to alert
+const alert = await driver.switchTo().alert();
+
+// Optional: read alert text
+const alertText = await alert.getText();
+console.log("Alert says:", alertText);
+
+// Accept the alert (click "OK")
+await alert.accept();
+
+
+    // const saveNextButtonfaqs = await driver.findElement(
+    //   By.xpath(
+    //     '//button[@type="submit" and contains(@class, "save-and-next-button")]'
+    //   )
+    // );
+    // await saveNextButtonfaqs.click();
+    // const saveNextButtonfaqs = await driver.wait(
+    //   until.elementLocated(
+    //     By.xpath("//button[normalize-space(text())='Save and Next']")
+    //   ),
+    //   5000
+    // );
+
+    // await driver.wait(until.elementIsVisible(saveNextButtonfaqs), 5000);
+    // await driver.wait(until.elementIsEnabled(saveNextButtonfaqs), 5000);
+
+    // await saveNextButtonfaqs.click();
+
+    const saveNextButtonfaqs = await driver.wait(
+      until.elementLocated(
+        By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+      ),
+      5000
+    );
+
+    console.log("saveNextButtonfaqs",saveNextButtonfaqs)
+    
+    // Ensure it is visible and enabled
+    await driver.wait(until.elementIsVisible(saveNextButtonfaqs), 5000);
+    await driver.wait(until.elementIsEnabled(saveNextButtonfaqs), 5000);
+    
+    // Click the button
+    await saveNextButtonfaqs.click();
+
+   
+    
+
+    await driver.sleep(2000);
+
+    // click on select activate button
+    const dropdownButtons = await driver.findElement(
+      By.xpath(
+        '//button[@id="dropdownMenuButton1" and contains(@class, "dropdown-toggle")]'
+      )
+    );
+    await dropdownButtons.click();
+
+    // click on activate button
+    const activeProducts = await driver.findElement(
+      By.xpath('//div[@class="dropdown-item" and text()="Active Product"]')
+    );
+    await activeProducts.click();
   } finally {
   }
 })();

@@ -1850,32 +1850,54 @@ const os = require("os");
 
     await saveButtonTask.click();
 
+    const faqsaveandnext = await driver.findElement(
+      By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+    );
+    await driver.executeScript("arguments[0].scrollIntoView(true);", faqsaveandnext);
+    await driver.wait(until.elementIsVisible(faqsaveandnext), 5000);
+    await driver.wait(until.elementIsEnabled(faqsaveandnext), 5000);
+    await faqsaveandnext.click();
+    
+
     // click to save and next
 
-    const saveNextButtontask = await driver.wait(
-      until.elementLocated(
-        By.xpath('//button[normalize-space()="Save and Next"]')
-      ),
-      10000
-    );
-
-    await driver.wait(until.elementIsVisible(saveNextButtontask), 5000);
-    await driver.wait(until.elementIsEnabled(saveNextButtontask), 5000);
-
-    await saveNextButtontask.click();
+    
 
     // faq save and next
-    const saveNextButtonFaq = await driver.wait(
-      until.elementLocated(
-        By.xpath('//button[normalize-space()="Save and Next"]')
-      ),
-      10000
-    );
+    // const saveNextButtonFaq = await driver.wait(
+    //   until.elementLocated(
+    //     By.xpath('//button[normalize-space()="Save and Next"]')
+    //   ),
+    //   10000
+    // );
 
-    await driver.wait(until.elementIsVisible(saveNextButtonFaq), 5000);
-    await driver.wait(until.elementIsEnabled(saveNextButtonFaq), 5000);
+    // await driver.wait(until.elementIsVisible(saveNextButtonFaq), 5000);
+    // await driver.wait(until.elementIsEnabled(saveNextButtonFaq), 5000);
 
-    await saveNextButtonFaq.click();
+    // await saveNextButtonFaq.click();
+   
+
+    // const saveNextButtonfaqs = await driver.wait(
+    //   until.elementLocated(
+    //     By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+    //   ),
+    //   5000
+    // );
+
+    // console.log("saveNextButtonfaqs",saveNextButtonfaqs)
+    
+    // // Ensure it is visible and enabled
+    // await driver.wait(until.elementIsVisible(saveNextButtonfaqs), 5000);
+    // await driver.wait(until.elementIsEnabled(saveNextButtonfaqs), 5000);
+
+    // const buttonSavefaq = await driver.findElement(
+    //   By.css("#product-left-tab > div > div.col-12.col-md-9 > div > div:nth-child(2) > button.save-and-next-button ")
+    // );
+    // const buttonText = await buttonSavefaq.getText();
+    //  console.log("buttonSavefaq", buttonText)
+    // await buttonSavefaq.click();
+   
+
   } finally {
   }
 })();
