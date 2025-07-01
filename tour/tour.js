@@ -1509,7 +1509,6 @@ const os = require("os");
       addRateButton
     );
     await driver.sleep(300);
-
     await addRateButton.click();
 
     // Enter Code
@@ -1527,7 +1526,6 @@ const os = require("os");
       codeInput
     );
     await driver.sleep(300);
-
     await codeInput.clear();
     await codeInput.sendKeys("exm-545");
 
@@ -1546,13 +1544,11 @@ const os = require("os");
       titleInput
     );
     await driver.sleep(300);
-
     await titleInput.clear();
     await titleInput.sendKeys("Amazing Sunset Tour");
     await driver.sleep(1000);
 
     // click on Select Language
-
     const labellang = await driver.wait(
       until.elementLocated(
         By.xpath("//label[normalize-space(text())='Languages']")
@@ -1637,7 +1633,6 @@ const os = require("os");
     await driver.sleep(1000);
 
     // Start Time and Duration
-
     const labeltime = await driver.wait(
       until.elementLocated(
         By.xpath("//label[normalize-space(text())='Start Time and Duration']")
@@ -1695,7 +1690,6 @@ const os = require("os");
     await checkboxs.click();
 
     // click on save button
-
     const saveButtons = await driver.wait(
       until.elementLocated(
         By.xpath(
