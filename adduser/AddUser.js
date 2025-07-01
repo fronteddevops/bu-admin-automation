@@ -209,7 +209,7 @@ const os = require("os");
     await selectPermission("accommodation-list", "Can view");
 
     await selectPermission("kanban", "Can view");
-    await driver.sleep(5000)
+    await driver.sleep(5000);
     await selectPermission("day-tour-list", "Can view");
     await selectPermission("create-booking", "Can view");
     await selectPermission("dailyDepartures", "Can view");
@@ -312,80 +312,75 @@ const os = require("os");
     //     ),
     //     10000
     //   );
-      
+
     //   await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", dropdown);
     //   await driver.sleep(300);
     //   await driver.executeScript("arguments[0].click();", dropdown);
-  // Step 1: Locate the label "Groups"
-const groupLabels = await driver.wait(
-    until.elementLocated(By.xpath("//label[normalize-space()='Groups']")),
-    10000
-  );
-  
-  const groupCombobox = await groupLabels.findElement(
-    By.xpath("./following-sibling::div//div[@role='combobox']")
-  );
-  
-//   await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", groupCombobox);
-  await driver.sleep(300);
-//   await driver.executeScript("arguments[0].click();", groupCombobox);
-    await groupCombobox.click()
+    // Step 1: Locate the label "Groups"
+    const groupLabels = await driver.wait(
+      until.elementLocated(By.xpath("//label[normalize-space()='Groups']")),
+      10000
+    );
 
-  await driver.sleep(1000);
+    const groupCombobox = await groupLabels.findElement(
+      By.xpath("./following-sibling::div//div[@role='combobox']")
+    );
 
-//   const listItem = await driver.wait(
-//     until.elementLocated(
-//       By.css("ul[role='listbox'] > li:nth-child(1)")
-//     ),
-//     10000
-//   );
-  
-//   await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", listItem);
-//   await driver.sleep(300);
-//   await driver.executeScript("arguments[0].click();", listItem);
+    //   await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", groupCombobox);
+    await driver.sleep(300);
+    //   await driver.executeScript("arguments[0].click();", groupCombobox);
+    await groupCombobox.click();
 
-const adminGroupOption = await driver.wait(
-    until.elementLocated(
-      By.xpath(`//span[text()='${selectedGroup}']`)
-    ),
-    10000
-  );
-  
-  // Scroll into view and click
-  await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", adminGroupOption);
-  await driver.sleep(300);
-  await adminGroupOption.click();
-  
-  
-  
-      
-      
+    await driver.sleep(1000);
+
+    //   const listItem = await driver.wait(
+    //     until.elementLocated(
+    //       By.css("ul[role='listbox'] > li:nth-child(1)")
+    //     ),
+    //     10000
+    //   );
+
+    //   await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", listItem);
+    //   await driver.sleep(300);
+    //   await driver.executeScript("arguments[0].click();", listItem);
+
+    const adminGroupOption = await driver.wait(
+      until.elementLocated(By.xpath(`//span[text()='${selectedGroup}']`)),
+      10000
+    );
+
+    // Scroll into view and click
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({ block: 'center' });",
+      adminGroupOption
+    );
+    await driver.sleep(300);
+    await adminGroupOption.click();
+
     // Step 1: Click the dropdown input
-// Step 1: Open the dropdown
-// const groupDropdown = await driver.wait(
-//     until.elementLocated(
-//       By.xpath("//label[normalize-space()='Groups']/following-sibling::div//div[@role='combobox']")
-//     ),
-//     10000
-//   );
-  
-//   await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", groupDropdown);
-//   await driver.sleep(300);
-//   await driver.executeScript("arguments[0].click();", groupDropdown);
-//   await driver.sleep(500); 
-  
-//   const adminGroupOption = await driver.wait(
-//     until.elementLocated(
-//       By.xpath("//span[normalize-space()='Admin Group']")
-//     ),
-//     5000
-//   );
-  
-//   await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", adminGroupOption);
-//   await driver.sleep(200);
-//   await driver.executeScript("arguments[0].click();", adminGroupOption);
-  
-  
+    // Step 1: Open the dropdown
+    // const groupDropdown = await driver.wait(
+    //     until.elementLocated(
+    //       By.xpath("//label[normalize-space()='Groups']/following-sibling::div//div[@role='combobox']")
+    //     ),
+    //     10000
+    //   );
+
+    //   await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", groupDropdown);
+    //   await driver.sleep(300);
+    //   await driver.executeScript("arguments[0].click();", groupDropdown);
+    //   await driver.sleep(500);
+
+    //   const adminGroupOption = await driver.wait(
+    //     until.elementLocated(
+    //       By.xpath("//span[normalize-space()='Admin Group']")
+    //     ),
+    //     5000
+    //   );
+
+    //   await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", adminGroupOption);
+    //   await driver.sleep(200);
+    //   await driver.executeScript("arguments[0].click();", adminGroupOption);
 
     // const groupSection = await driver.wait(
     //     until.elementLocated(
