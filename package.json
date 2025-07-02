@@ -11,9 +11,11 @@
   "description": "",
   "dependencies": {
     "chromedriver": "^137.0.4",
+    "cucumber-html-reporter": "^7.2.0",
     "selenium-webdriver": "^4.33.0"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^11.3.0",
     "mocha": "^11.7.0"
   }
 }
