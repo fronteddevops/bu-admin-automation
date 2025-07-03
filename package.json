@@ -3,19 +3,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:cucumber": "cucumber-js features/adduser.feature --require features/step_definitions/adduser.steps.js --format json:reports/adduser_report.json",
+    "report:cucumber": "node features/step_definitions/generateReport.js",
+    "test:adduser": "cucumber-js features/adduser.feature --require features/step_definitions/adduser.steps.js --format json:reports/adduser_report.json",
+    "report:tour": "node features/step_definitions/generateTourReport.js",
+    "test:addtour": "cucumber-js features/tour.feature --require features/step_definitions/tour.steps.js --format json:reports/tour_report.json && npm run report:tour",
+    "test:with-report": "npm run test:cucumber && npm run report:tour"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "chromedriver": "^137.0.4",
-    "cucumber-html-reporter": "^7.2.0",
     "selenium-webdriver": "^4.33.0"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.3.0",
+    "chromedriver": "^138.0.1",
+    "cucumber-html-reporter": "^7.2.0",
     "mocha": "^11.7.0"
   }
 }
