@@ -9,7 +9,7 @@
     "report:tour": "node features/step_definitions/generateTourReport.js",
     "test:addtour": "cucumber-js features/tour.feature --require features/step_definitions/tour.steps.js --format json:reports/tour_report.json && npm run report:tour",
     "test:with-report": "npm run test:cucumber && npm run report:tour",
-    "test:accommodataion": "cucumber-js features/accommodation.feature --require features/step_definitions/accommodation.steps.js --format json:reports/accommodation_report.json",
+    "test:accommodation": "cucumber-js features/addaccommodation.feature --require features/step_definitions/addaccommodation.steps.js --format json:reports/addaccommodation_report.json",
     "report:accommodation" : "node features/step_definitions/accommodationReport.js"
   },
   "keywords": [],

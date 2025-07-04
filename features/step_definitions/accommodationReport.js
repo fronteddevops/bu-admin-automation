@@ -1,7 +1,7 @@
 const fs = require('fs');
 const reporter = require('cucumber-html-reporter');
 
-const jsonReportPath = 'reports/accommodation_report.json';
+const jsonReportPath = 'reports/addaccommodation_report.json';
 
 if (!fs.existsSync(jsonReportPath)) {
   console.error(`\nERROR: The report JSON file was not found at ${jsonReportPath}.\nPlease run 'npm run test:cucumber' first to generate the report data.\n`);
@@ -11,7 +11,7 @@ if (!fs.existsSync(jsonReportPath)) {
 const options = {
   theme: 'bootstrap',
   jsonFile: jsonReportPath,
-  output: 'reports/accommodation_report.html',
+  output: 'reports/addaccommodation_report.html',
   reportSuiteAsScenarios: true,
   launchReport: true,
   metadata: {
