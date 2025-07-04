@@ -221,7 +221,6 @@ Then("Choose Country Choose State and Choose City", async function () {
 });
 
 // Type of Experience
-
 Then("Select Experience Type", async function () {
   const labelexp = await driver.wait(
     until.elementLocated(
@@ -261,7 +260,6 @@ Then("Select Experience Type", async function () {
 });
 
 // Select Theme Describe Experience
-
 Then("Select Theme That Describe Experice", async function () {
   const labelbestexp = await driver.wait(
     until.elementLocated(
@@ -301,7 +299,6 @@ Then("Select Theme That Describe Experice", async function () {
 });
 
 // Select Category Describe Experience
-
 Then("Select Categories That Describe Experience", async function () {
   const labelroomamenities = await driver.wait(
     until.elementLocated(
@@ -342,7 +339,6 @@ Then("Select Categories That Describe Experience", async function () {
 });
 
 // click on save and next button
-
 When("Click on Save And Next Button", async function () {
   const buttons = await driver.findElements(
     By.xpath(
@@ -401,7 +397,7 @@ When("Select Traveller Experience", async function () {
 
 // Select image of experience
 
-When("Select Image of Experience", async function(){
+When("Select Image of Experience", async function () {
   const downloadsFolderDrag = path.join(os.homedir(), "Downloads");
   const imagePaths = path.join(
     downloadsFolderDrag,
@@ -419,9 +415,9 @@ When("Select Image of Experience", async function(){
   );
   await fileInputfile.sendKeys(imagePaths);
   await driver.sleep(1000);
-})
+});
 
-When("Enter Video Link", async function(){
+When("Enter Video Link", async function () {
   const videoInput = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -440,9 +436,9 @@ When("Enter Video Link", async function(){
   // Clear and input your text
   await videoInput.clear();
   await videoInput.sendKeys("https://example.com/my-video-link");
-})
+});
 
-When("Click on Save and Next Button", async function(){
+When("Click on Save and Next Button", async function () {
   const buttonsmedia = await driver.findElements(
     By.xpath(
       "//button[contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
@@ -451,14 +447,12 @@ When("Click on Save and Next Button", async function(){
   await buttonsmedia[0].click();
 
   // click on save button
- 
-})
+});
 
 //  Avaibility
-
 // Click on time and date
 
- Then("in Avaibility Date and time and Click on Save", async function(){
+Then("in Avaibility Date and time and Click on Save", async function () {
   const saveButton = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -476,11 +470,10 @@ When("Click on Save and Next Button", async function(){
 
   // Click the button
   await saveButton.click();
-  await driver.sleep(2000)
+  await driver.sleep(2000);
+});
 
- })
-
- When("in Booking Cutoff Enter Week,Days,Hour and Minute", async function(){
+When("in Booking Cutoff Enter Week,Days,Hour and Minute", async function () {
   const weeksInput = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -558,9 +551,9 @@ When("Click on Save and Next Button", async function(){
   // Clear any existing value and enter 3
   await minutesInput.clear();
   await minutesInput.sendKeys("3");
- })
+});
 
- When("Click on Relative to Start Time and Click on Save",async function(){
+When("Click on Relative to Start Time and Click on Save", async function () {
   const relativeStartRadio = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -594,10 +587,9 @@ When("Click on Save and Next Button", async function(){
   );
   await driver.sleep(300);
   await driver.executeScript("arguments[0].click();", savedButton);
+});
 
- })
-
- When("In Capacity Click on Save", async function(){
+When("In Capacity Click on Save", async function () {
   const savedsButton = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -616,9 +608,8 @@ When("Click on Save and Next Button", async function(){
   await driver.sleep(300);
 
   await driver.executeScript("arguments[0].click();", savedsButton);
-
- })
- When("Start Time Click on Add Start-Time -Duration", async function(){
+});
+When("Start Time Click on Add Start-Time -Duration", async function () {
   const addTimeButton = await driver.wait(
     until.elementLocated(
       By.xpath("//button[contains(text(),'Add Start - Time / Duration')]")
@@ -632,9 +623,8 @@ When("Click on Save and Next Button", async function(){
   );
   await driver.sleep(300);
   await driver.executeScript("arguments[0].click();", addTimeButton);
-  
- })
- When("Enter Time, Hours , Minutes and click Save Button", async function(){
+});
+When("Enter Time, Hours , Minutes and click Save Button", async function () {
   const startTimeInput = await driver.wait(
     until.elementLocated(By.id("start-time")),
     5000
@@ -704,13 +694,8 @@ When("Click on Save and Next Button", async function(){
     clicksaveButton
   );
   await driver.sleep(300);
-
   await driver.executeScript("arguments[0].click();", clicksaveButton);
 
- 
-  
- })
- When("Click on Save Button", async function(){
   const saveButtonclick = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -727,10 +712,27 @@ When("Click on Save and Next Button", async function(){
   await driver.sleep(300);
 
   await driver.executeScript("arguments[0].click();", saveButtonclick);
-  
- })
+});
+// When("Click on Save Button", async function () {
+//   const saveButtonclick = await driver.wait(
+//     until.elementLocated(
+//       By.xpath(
+//         "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save']"
+//       )
+//     ),
+//     5000
+//   );
 
- When("Calender , Add Avaibility , Veiw Avaibility and Save", async function(){
+//   await driver.executeScript(
+//     "arguments[0].scrollIntoView({block: 'center'});",
+//     saveButtonclick
+//   );
+//   await driver.sleep(300);
+
+//   await driver.executeScript("arguments[0].click();", saveButtonclick);
+// });
+
+When("Calender , Add Avaibility , Veiw Avaibility and Save", async function () {
   const addAvailabilityButton = await driver.wait(
     until.elementLocated(
       By.xpath("//button[normalize-space(text())='Add Availability']")
@@ -787,9 +789,7 @@ When("Click on Save and Next Button", async function(){
 
   // Step 1: Select Start Date input by placeholder
   const startDateInput = await driver.wait(
-    until.elementLocated(
-      By.xpath("//input[@placeholder='Select Start Date']")
-    ),
+    until.elementLocated(By.xpath("//input[@placeholder='Select Start Date']")),
     5000
   );
   await driver.executeScript(
@@ -813,7 +813,6 @@ When("Click on Save and Next Button", async function(){
   await endDateInput.sendKeys("07/26/2025");
 
   // click on week day
-
   const wDayButton = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -824,7 +823,6 @@ When("Click on Save and Next Button", async function(){
   );
 
   const buttonText = await wDayButton.getText();
-  console.log("Button text is:", buttonText);
 
   // await driver.executeScript(
   //   "arguments[0].scrollIntoView({block: 'center'});",
@@ -846,7 +844,6 @@ When("Click on Save and Next Button", async function(){
   await greenPatchButton.click();
 
   // click on save button
-
   const saveButtonclk = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -880,86 +877,552 @@ When("Click on Save and Next Button", async function(){
   await driver.sleep(300);
 
   await saveButtoncl.click();
- })
+});
 
- When("Pick And Drop - Select experience pickup places and Dropoff places", async function(){
-  const labelExpPickup = await driver.wait(
+When(
+  "Pick And Drop - Select experience pickup places and Dropoff places",
+  async function () {
+    const labelExpPickup = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='Set up the Experience Pickup Places']"
+        )
+      ),
+      10000
+    );
+
+    const outerContainer = await labelExpPickup.findElement(
+      By.xpath("./ancestor::div[3]")
+    );
+
+    const containerExpPickup = await outerContainer.findElement(
+      By.css(".css-b62m3t-container")
+    );
+
+    const selectControlExpPickup = await containerExpPickup.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      selectControlExpPickup
+    );
+    await driver.sleep(200);
+
+    await selectControlExpPickup.click();
+
+    const inputExpPickup = await containerExpPickup.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await driver.sleep(1000);
+    await inputExpPickup.sendKeys(Key.ENTER);
+
+    const labelDropOff = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='Set up the Experience Drop-Off Places']"
+        )
+      ),
+      10000
+    );
+
+    const parentDiv = await labelDropOff.findElement(
+      By.xpath("./following-sibling::div[contains(@class, 'form-group')]")
+    );
+
+    const dropdownContainer = await parentDiv.findElement(
+      By.css(".css-b62m3t-container")
+    );
+
+    const control = await dropdownContainer.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      control
+    );
+    await driver.sleep(300);
+
+    await driver.executeScript("arguments[0].click();", control);
+
+    const input = await dropdownContainer.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await driver.sleep(1000);
+    await input.sendKeys(Key.ARROW_DOWN, Key.ENTER);
+    await driver.sleep(200);
+    await input.sendKeys(Key.ENTER);
+    await driver.sleep(1000);
+
+    // click on save and next button
+    const saveAndNextButton = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
+      ),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(saveAndNextButton), 5000);
+    await driver.wait(until.elementIsEnabled(saveAndNextButton), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      saveAndNextButton
+    );
+    await driver.sleep(300);
+    await driver.executeScript("arguments[0].click();", saveAndNextButton);
+
+    // again click save and next
+    await driver.sleep(1000);
+    const saveAndNextButtonNext = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
+      ),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(saveAndNextButtonNext), 5000);
+    await driver.wait(until.elementIsEnabled(saveAndNextButtonNext), 5000);
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      saveAndNextButtonNext
+    );
+    await driver.sleep(300);
+    await driver.executeScript("arguments[0].click();", saveAndNextButtonNext);
+  }
+);
+
+When(
+  "Incluson and Exclusion - Select include Experience and not include Experience",
+  async function () {
+    await driver.sleep(1000);
+    const labelexpincexv = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='What is Include in your Expirience ?']"
+        )
+      ),
+      10000
+    );
+
+    const parentDivincexc = await labelexpincexv.findElement(
+      By.xpath("./following-sibling::div[1]")
+    );
+
+    const dropdownContainerincexp = await parentDivincexc.findElement(
+      By.css(".css-b62m3t-container")
+    );
+
+    const controlincexc = await dropdownContainerincexp.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      controlincexc
+    );
+    await driver.sleep(300);
+    await driver.executeScript("arguments[0].click();", controlincexc);
+    await driver.sleep(1000);
+
+    const inputincexc = await dropdownContainerincexp.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await driver.sleep(1000);
+    await inputincexc.sendKeys(Key.ARROW_DOWN, Key.ENTER);
+    await driver.sleep(200);
+    await inputincexc.sendKeys(Key.ENTER);
+
+    await driver.sleep(1000);
+
+    const labelexpincexv1 = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='What is NOT Include in your Expirience ?']"
+        )
+      ),
+      10000
+    );
+
+    const parentDivincexc1 = await labelexpincexv1.findElement(
+      By.xpath("./following-sibling::div[1]")
+    );
+
+    const dropdownContainerincexp1 = await parentDivincexc1.findElement(
+      By.css(".css-b62m3t-container")
+    );
+
+    const controlincexc1 = await dropdownContainerincexp1.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      controlincexc1
+    );
+    await driver.sleep(300);
+    await driver.executeScript("arguments[0].click();", controlincexc1);
+    await driver.sleep(1000);
+
+    const inputincexc1 = await dropdownContainerincexp1.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await driver.sleep(1000);
+    await inputincexc1.sendKeys(Key.ARROW_DOWN, Key.ENTER);
+    await driver.sleep(200);
+    await inputincexc1.sendKeys(Key.ENTER);
+
+    // save and next button
+    const saveAndNextButtonexp = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
+      ),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(saveAndNextButtonexp), 5000);
+    await driver.wait(until.elementIsEnabled(saveAndNextButtonexp), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      saveAndNextButtonexp
+    );
+
+    await driver.sleep(300);
+
+    await driver.executeScript("arguments[0].click();", saveAndNextButtonexp);
+  }
+);
+
+When(
+  "Important Info- Select luggage available tour, Age Range , What to Bring , Cancelaltion Policy",
+  async function () {
+    const lablelang = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='Pick Languages available on the tour.']"
+        )
+      ),
+      10000
+    );
+
+    const parentDivinlang = await lablelang.findElement(
+      By.xpath("./following-sibling::div[1]")
+    );
+
+    const dropdownContainerlang = await parentDivinlang.findElement(
+      By.css(".css-b62m3t-container")
+    );
+
+    const controlincelang = await dropdownContainerlang.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      controlincelang
+    );
+    await driver.sleep(300);
+    await driver.executeScript("arguments[0].click();", controlincelang);
+    await driver.sleep(1000);
+
+    const inputlang = await dropdownContainerlang.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await driver.sleep(1000);
+    await inputlang.sendKeys(Key.ARROW_DOWN, Key.ENTER);
+    await driver.sleep(200);
+    await inputlang.sendKeys(Key.ENTER);
+
+    await driver.sleep(1000);
+
+    // click on Age Range
+    const lableage = await driver.wait(
+      until.elementLocated(
+        By.xpath("//label[normalize-space(text())='Age Range']")
+      ),
+      10000
+    );
+
+    const parentDivinage = await lableage.findElement(
+      By.xpath("./following-sibling::div[1]")
+    );
+
+    const dropdownContainerage = await parentDivinage.findElement(
+      By.css(".css-b62m3t-container")
+    );
+
+    const controlage = await dropdownContainerage.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      controlage
+    );
+    await driver.sleep(300);
+    await driver.executeScript("arguments[0].click();", controlage);
+    await driver.sleep(1000);
+
+    const inputage = await dropdownContainerage.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await driver.sleep(1000);
+    await inputage.sendKeys(Key.ARROW_DOWN, Key.ENTER);
+    await driver.sleep(200);
+    await inputage.sendKeys(Key.ENTER);
+
+    // click on Want to Bring
+    const lablebring = await driver.wait(
+      until.elementLocated(
+        By.xpath("//label[normalize-space(text())='What to Bring']")
+      ),
+      10000
+    );
+
+    const parentDivinbring = await lablebring.findElement(
+      By.xpath("./following-sibling::div[1]")
+    );
+
+    const dropdownContainbring = await parentDivinbring.findElement(
+      By.css(".css-b62m3t-container")
+    );
+
+    const controlbring = await dropdownContainbring.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      controlbring
+    );
+    await driver.sleep(300);
+    await driver.executeScript("arguments[0].click();", controlbring);
+    await driver.sleep(1000);
+
+    const inputbring = await dropdownContainbring.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await driver.sleep(1000);
+    await inputbring.sendKeys(Key.ARROW_DOWN, Key.ENTER);
+    await driver.sleep(200);
+    await inputbring.sendKeys(Key.ENTER);
+
+    // Cancellation Policy
+    const lablepolicy = await driver.wait(
+      until.elementLocated(
+        By.xpath("//label[normalize-space(text())='Cancellation Policy']")
+      ),
+      10000
+    );
+
+    const formGroupDiv = await lablepolicy.findElement(
+      By.xpath("./following-sibling::div[contains(@class, 'form-group')]")
+    );
+
+    const dropdownContainpolicy = await formGroupDiv.findElement(
+      By.css(".css-b62m3t-container")
+    );
+
+    const controlpolicy = await dropdownContainpolicy.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      controlpolicy
+    );
+    await driver.sleep(300);
+    await driver.executeScript("arguments[0].click();", controlpolicy);
+    await driver.sleep(1000);
+
+    const inputpolicy1 = await dropdownContainpolicy.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await inputpolicy1.sendKeys(Key.ARROW_DOWN);
+    await driver.sleep(200);
+    await inputpolicy1.sendKeys(Key.ENTER);
+
+    const inputpolicy2 = await dropdownContainpolicy.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await inputpolicy2.sendKeys(Key.ARROW_DOWN, Key.ENTER);
+    await driver.sleep(300);
+
+    // click on save and next button
+    const button = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
+      ),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(button), 5000);
+    await driver.wait(until.elementIsEnabled(button), 5000);
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      button
+    );
+    await driver.sleep(300);
+
+    await driver.executeScript("arguments[0].click();", button);
+  }
+);
+
+When("Know Before You Go - What should Traveller, Physicall Difficulty,Age Limit", async function(){
+  const labelPolicy = await driver.wait(
     until.elementLocated(
       By.xpath(
-        "//label[normalize-space(text())='Set up the Experience Pickup Places']"
+        "//label[normalize-space(text())='What should travelers know before they book?']"
       )
     ),
     10000
   );
 
-  const outerContainer = await labelExpPickup.findElement(
-    By.xpath("./ancestor::div[3]")
-  );
-
-  const containerExpPickup = await outerContainer.findElement(
-    By.css(".css-b62m3t-container")
-  );
-
-  const selectControlExpPickup = await containerExpPickup.findElement(
-    By.css(".css-13cymwt-control")
-  );
-
+  // Scroll the label into view (optional)
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    selectControlExpPickup
-  );
-  await driver.sleep(200);
-
-  await selectControlExpPickup.click();
-
-  const inputExpPickup = await containerExpPickup.findElement(
-    By.css("input[id^='react-select'][id$='-input']")
-  );
-
-  await driver.sleep(1000);
-  await inputExpPickup.sendKeys(Key.ENTER);
-
-  const labelDropOff = await driver.wait(
-    until.elementLocated(
-      By.xpath(
-        "//label[normalize-space(text())='Set up the Experience Drop-Off Places']"
-      )
-    ),
-    10000
-  );
-
-  const parentDiv = await labelDropOff.findElement(
-    By.xpath("./following-sibling::div[contains(@class, 'form-group')]")
-  );
-
-  const dropdownContainer = await parentDiv.findElement(
-    By.css(".css-b62m3t-container")
-  );
-
-  const control = await dropdownContainer.findElement(
-    By.css(".css-13cymwt-control")
-  );
-
-  await driver.executeScript(
-    "arguments[0].scrollIntoView({block: 'center'});",
-    control
+    labelPolicy
   );
   await driver.sleep(300);
 
-  await driver.executeScript("arguments[0].click();", control);
+  // Now directly locate the dropdown container globally (not relative to label)
+  const dropdownContainerPolicy = await driver.wait(
+    until.elementLocated(By.css(".css-b62m3t-container")),
+    5000
+  );
 
-  const input = await dropdownContainer.findElement(
+  // Then locate the control within it
+  const controlPolicy = await dropdownContainerPolicy.findElement(
+    By.css(".css-13cymwt-control")
+  );
+
+  // Scroll and click
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    controlPolicy
+  );
+  await driver.sleep(300);
+  await driver.executeScript("arguments[0].click();", controlPolicy);
+  await driver.sleep(1000);
+
+  // Locate the input and select via keyboard
+  const inputPolicy = await dropdownContainerPolicy.findElement(
     By.css("input[id^='react-select'][id$='-input']")
   );
 
-  await driver.sleep(1000);
-  await input.sendKeys(Key.ARROW_DOWN, Key.ENTER);
-  await driver.sleep(200);
-  await input.sendKeys(Key.ENTER);
-  await driver.sleep(1000)
+  await driver.sleep(500);
+  await inputPolicy.sendKeys(Key.ARROW_DOWN);
+  await driver.sleep(300);
+  await inputPolicy.sendKeys(Key.ENTER);
 
-  // click on save and next button
-  const saveAndNextButton = await driver.wait(
+  // Lis important information
+  const experienceInfoTextarea = await driver.wait(
+    until.elementLocated(By.id("experienceInfo")),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    experienceInfoTextarea
+  );
+  await driver.sleep(300);
+
+  await experienceInfoTextarea.clear();
+  await experienceInfoTextarea.sendKeys(
+    "Here is some important experience information."
+  );
+
+  // physical difficulty label
+  const labelPhysical = await driver.wait(
+    until.elementLocated(
+      By.xpath("//label[normalize-space(text())='Physical difficulty level']")
+    ),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    labelPhysical
+  );
+  await driver.sleep(300);
+
+  const dropdownContainerPhysical = await driver.wait(
+    until.elementLocated(By.css(".css-b62m3t-container")),
+    5000
+  );
+
+  const controlPhysical = await dropdownContainerPhysical.findElement(
+    By.css(".css-13cymwt-control")
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    controlPhysical
+  );
+  await driver.sleep(300);
+  await driver.executeScript("arguments[0].click();", controlPhysical);
+  await driver.sleep(1000);
+
+  const inputPhysical = await dropdownContainerPhysical.findElement(
+    By.css("input[id^='react-select'][id$='-input']")
+  );
+
+  await driver.sleep(500);
+  await inputPhysical.sendKeys(Key.ARROW_DOWN);
+  await driver.sleep(300);
+  await inputPhysical.sendKeys(Key.ENTER);
+  await driver.sleep(1000);
+
+  // click on Age Limit Radio Box
+  const checkbox = await driver.wait(
+    until.elementLocated(By.css("input[type='checkbox'].MuiSwitch-input")),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    checkbox
+  );
+  await driver.sleep(300);
+
+  await driver.executeScript("arguments[0].click();", checkbox);
+
+  // Input Age
+  const ageInput = await driver.wait(
+    until.elementLocated(By.css("input[type='number'][placeholder='Age']")),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    ageInput
+  );
+  await driver.sleep(300);
+
+  await ageInput.clear();
+  await ageInput.sendKeys("40");
+
+  // click to Save and Next Button
+  const saveAndNextButtonknow = await driver.wait(
     until.elementLocated(
       By.xpath(
         "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
@@ -968,20 +1431,42 @@ When("Click on Save and Next Button", async function(){
     10000
   );
 
-  await driver.wait(until.elementIsVisible(saveAndNextButton), 5000);
-  await driver.wait(until.elementIsEnabled(saveAndNextButton), 5000);
+  await driver.wait(until.elementIsVisible(saveAndNextButtonknow), 5000);
+  await driver.wait(until.elementIsEnabled(saveAndNextButtonknow), 5000);
 
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    saveAndNextButton
+    saveAndNextButtonknow
   );
   await driver.sleep(300);
-  await driver.executeScript("arguments[0].click();", saveAndNextButton);
 
-  // again click save and next
+  await driver.executeScript("arguments[0].click();", saveAndNextButtonknow);
 
-  await driver.sleep(1000);
-  const saveAndNextButtonNext = await driver.wait(
+})
+When("Route - Description", async function(){
+  const textareaRouteInfo = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//textarea[@placeholder='Route important information here...']"
+      )
+    ),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    textareaRouteInfo
+  );
+
+  await driver.sleep(300);
+
+  await textareaRouteInfo.clear();
+  await textareaRouteInfo.sendKeys(
+    "This is the route information for the experience."
+  );
+
+  // click to save and next button
+  const saveAndNextButtondesc = await driver.wait(
     until.elementLocated(
       By.xpath(
         "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
@@ -990,303 +1475,545 @@ When("Click on Save and Next Button", async function(){
     10000
   );
 
-  await driver.wait(until.elementIsVisible(saveAndNextButtonNext), 5000);
-  await driver.wait(until.elementIsEnabled(saveAndNextButtonNext), 5000);
+  await driver.wait(until.elementIsVisible(saveAndNextButtondesc), 5000);
+  await driver.wait(until.elementIsEnabled(saveAndNextButtondesc), 5000);
+
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    saveAndNextButtonNext
+    saveAndNextButtondesc
   );
   await driver.sleep(300);
-  await driver.executeScript("arguments[0].click();", saveAndNextButtonNext);
- })
 
- When("Incluson and Exclusion - Select include Experience and not include Experience", async function(){
-  await driver.sleep(1000);
-  const labelexpincexv = await driver.wait(
+  await driver.executeScript("arguments[0].click();", saveAndNextButtondesc);
+})
+
+When("Pricing - Enter Code, Title, Languages, Cancellation Policy, Start Time and Duration", async function(){
+  const addRateButton = await driver.wait(
     until.elementLocated(
       By.xpath(
-        "//label[normalize-space(text())='What is Include in your Expirience ?']"
+        "//button[contains(@class, 'primary-btn') and normalize-space(text())='Add Rate']"
       )
     ),
     10000
   );
 
-  const parentDivincexc = await labelexpincexv.findElement(
-    By.xpath("./following-sibling::div[1]")
-  );
-
-  const dropdownContainerincexp = await parentDivincexc.findElement(
-    By.css(".css-b62m3t-container")
-  );
-
-  const controlincexc = await dropdownContainerincexp.findElement(
-    By.css(".css-13cymwt-control")
-  );
-
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    controlincexc
+    addRateButton
   );
   await driver.sleep(300);
-  await driver.executeScript("arguments[0].click();", controlincexc);
-  await driver.sleep(1000);
+  await addRateButton.click();
 
-  const inputincexc = await dropdownContainerincexp.findElement(
-    By.css("input[id^='react-select'][id$='-input']")
-  );
-
-  await driver.sleep(1000);
-  await inputincexc.sendKeys(Key.ARROW_DOWN, Key.ENTER);
-  await driver.sleep(200);
-  await inputincexc.sendKeys(Key.ENTER);
-
-  await driver.sleep(1000);
-
-  const labelexpincexv1 = await driver.wait(
+  // Enter Code
+  const codeInput = await driver.wait(
     until.elementLocated(
       By.xpath(
-        "//label[normalize-space(text())='What is NOT Include in your Expirience ?']"
+        "//label[normalize-space(text())='Code']/following-sibling::input[@placeholder='enter code']"
       )
     ),
     10000
   );
 
-  const parentDivincexc1 = await labelexpincexv1.findElement(
-    By.xpath("./following-sibling::div[1]")
-  );
-
-  const dropdownContainerincexp1 = await parentDivincexc1.findElement(
-    By.css(".css-b62m3t-container")
-  );
-
-  const controlincexc1 = await dropdownContainerincexp1.findElement(
-    By.css(".css-13cymwt-control")
-  );
-
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    controlincexc1
+    codeInput
   );
   await driver.sleep(300);
-  await driver.executeScript("arguments[0].click();", controlincexc1);
-  await driver.sleep(1000);
+  await codeInput.clear();
+  await codeInput.sendKeys("exm-545");
 
-  const inputincexc1 = await dropdownContainerincexp1.findElement(
-    By.css("input[id^='react-select'][id$='-input']")
-  );
-
-  await driver.sleep(1000);
-  await inputincexc1.sendKeys(Key.ARROW_DOWN, Key.ENTER);
-  await driver.sleep(200);
-  await inputincexc1.sendKeys(Key.ENTER);
-
-  // save and next button
-  const saveAndNextButtonexp = await driver.wait(
+  // Enter Title
+  const titleInput = await driver.wait(
     until.elementLocated(
       By.xpath(
-        "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        "//label[normalize-space(text())='Title']/following-sibling::input[@placeholder='enter title']"
       )
     ),
     10000
   );
 
-  await driver.wait(until.elementIsVisible(saveAndNextButtonexp), 5000);
-  await driver.wait(until.elementIsEnabled(saveAndNextButtonexp), 5000);
-
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    saveAndNextButtonexp
+    titleInput
   );
-
   await driver.sleep(300);
+  await titleInput.clear();
+  await titleInput.sendKeys("Amazing Sunset Tour");
+  await driver.sleep(1000);
 
-  await driver.executeScript("arguments[0].click();", saveAndNextButtonexp);
-
- })
-
- When("Important Info- Select luggage available tour, Age Range , What to Bring , Cancelaltion Policy", async function(){
-  const lablelang = await driver.wait(
+  // click on Select Language
+  const labellang = await driver.wait(
     until.elementLocated(
-      By.xpath(
-        "//label[normalize-space(text())='Pick Languages available on the tour.']"
-      )
+      By.xpath("//label[normalize-space(text())='Languages']")
     ),
     10000
   );
 
-  const parentDivinlang = await lablelang.findElement(
-    By.xpath("./following-sibling::div[1]")
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    labellang
+  );
+  await driver.sleep(300);
+
+  const dropdownContainerlangs = await driver.wait(
+    until.elementLocated(By.css(".css-b62m3t-container")),
+    5000
   );
 
-  const dropdownContainerlang = await parentDivinlang.findElement(
-    By.css(".css-b62m3t-container")
-  );
-
-  const controlincelang = await dropdownContainerlang.findElement(
+  const controllang = await dropdownContainerlangs.findElement(
     By.css(".css-13cymwt-control")
   );
 
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    controlincelang
+    controllang
   );
   await driver.sleep(300);
-  await driver.executeScript("arguments[0].click();", controlincelang);
+  await driver.executeScript("arguments[0].click();", controllang);
   await driver.sleep(1000);
 
-  const inputlang = await dropdownContainerlang.findElement(
+  const inputlangs = await dropdownContainerlangs.findElement(
     By.css("input[id^='react-select'][id$='-input']")
   );
 
-  await driver.sleep(1000);
-  await inputlang.sendKeys(Key.ARROW_DOWN, Key.ENTER);
-  await driver.sleep(200);
-  await inputlang.sendKeys(Key.ENTER);
-
-  await driver.sleep(1000);
-
-  // click on Age Range
-  const lableage = await driver.wait(
-    until.elementLocated(
-      By.xpath("//label[normalize-space(text())='Age Range']")
-    ),
-    10000
-  );
-
-  const parentDivinage = await lableage.findElement(
-    By.xpath("./following-sibling::div[1]")
-  );
-
-  const dropdownContainerage = await parentDivinage.findElement(
-    By.css(".css-b62m3t-container")
-  );
-
-  const controlage = await dropdownContainerage.findElement(
-    By.css(".css-13cymwt-control")
-  );
-
-  await driver.executeScript(
-    "arguments[0].scrollIntoView({block: 'center'});",
-    controlage
-  );
+  await driver.sleep(500);
+  await inputlangs.sendKeys(Key.ARROW_DOWN);
   await driver.sleep(300);
-  await driver.executeScript("arguments[0].click();", controlage);
+  await inputlangs.sendKeys(Key.ENTER);
   await driver.sleep(1000);
 
-  const inputage = await dropdownContainerage.findElement(
-    By.css("input[id^='react-select'][id$='-input']")
-  );
-
-  await driver.sleep(1000);
-  await inputage.sendKeys(Key.ARROW_DOWN, Key.ENTER);
-  await driver.sleep(200);
-  await inputage.sendKeys(Key.ENTER);
-
-  // click on Want to Bring
-  const lablebring = await driver.wait(
-    until.elementLocated(
-      By.xpath("//label[normalize-space(text())='What to Bring']")
-    ),
-    10000
-  );
-
-  const parentDivinbring = await lablebring.findElement(
-    By.xpath("./following-sibling::div[1]")
-  );
-
-  const dropdownContainbring = await parentDivinbring.findElement(
-    By.css(".css-b62m3t-container")
-  );
-
-  const controlbring = await dropdownContainbring.findElement(
-    By.css(".css-13cymwt-control")
-  );
-
-  await driver.executeScript(
-    "arguments[0].scrollIntoView({block: 'center'});",
-    controlbring
-  );
-  await driver.sleep(300);
-  await driver.executeScript("arguments[0].click();", controlbring);
-  await driver.sleep(1000);
-
-  const inputbring = await dropdownContainbring.findElement(
-    By.css("input[id^='react-select'][id$='-input']")
-  );
-
-  await driver.sleep(1000);
-  await inputbring.sendKeys(Key.ARROW_DOWN, Key.ENTER);
-  await driver.sleep(200);
-  await inputbring.sendKeys(Key.ENTER);
-
-  // Cancellation Policy
-  const lablepolicy = await driver.wait(
+  // select Cancellation Policy
+  const labelCancellation = await driver.wait(
     until.elementLocated(
       By.xpath("//label[normalize-space(text())='Cancellation Policy']")
     ),
     10000
   );
 
-  // Go to its following sibling div with class 'form-group'
-  const formGroupDiv = await lablepolicy.findElement(
-    By.xpath("./following-sibling::div[contains(@class, 'form-group')]")
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    labelCancellation
+  );
+  await driver.sleep(300);
+
+  const containerDiv = await labelCancellation.findElement(
+    By.xpath("./ancestor::div[contains(@class, 'w-100')]")
   );
 
-  // Inside that, find the dropdown container
-  const dropdownContainpolicy = await formGroupDiv.findElement(
+  const dropdownContainerCancellation = await containerDiv.findElement(
     By.css(".css-b62m3t-container")
   );
 
-  // Find and click the dropdown control
-  const controlpolicy = await dropdownContainpolicy.findElement(
+  const controlCancellation = await dropdownContainerCancellation.findElement(
     By.css(".css-13cymwt-control")
   );
 
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    controlpolicy
+    controlCancellation
   );
   await driver.sleep(300);
-  await driver.executeScript("arguments[0].click();", controlpolicy);
+  await driver.executeScript("arguments[0].click();", controlCancellation);
   await driver.sleep(1000);
 
-  // Optionally, select one item
-  const inputpolicy1 = await dropdownContainpolicy.findElement(
+  const inputCancellation = await dropdownContainerCancellation.findElement(
     By.css("input[id^='react-select'][id$='-input']")
   );
 
-  await inputpolicy1.sendKeys(Key.ARROW_DOWN);
-  await driver.sleep(200);
-  await inputpolicy1.sendKeys(Key.ENTER);
+  await inputCancellation.sendKeys(Key.ARROW_DOWN);
+  await driver.sleep(300);
+  await inputCancellation.sendKeys(Key.ENTER);
+  await driver.sleep(1000);
 
-  // Input field inside react-select
-  const inputpolicy2 = await dropdownContainpolicy.findElement(
-    By.css("input[id^='react-select'][id$='-input']")
+  // Start Time and Duration
+  const labeltime = await driver.wait(
+    until.elementLocated(
+      By.xpath("//label[normalize-space(text())='Start Time and Duration']")
+    ),
+    10000
   );
 
-  await inputpolicy2.sendKeys(Key.ARROW_DOWN, Key.ENTER);
+  // Scroll to the label
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    labeltime
+  );
   await driver.sleep(300);
 
-  // click on save and next button
-  const button = await driver.wait(
+  const wrapperDiv = await labeltime.findElement(
+    By.xpath(
+      "./following-sibling::div[contains(@class, 'css-b62m3t-container')]"
+    )
+  );
+
+  const controltime = await wrapperDiv.findElement(
+    By.css(".css-13cymwt-control")
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    controltime
+  );
+  await driver.sleep(300);
+  await driver.executeScript("arguments[0].click();", controltime);
+  await driver.sleep(1000);
+
+  const inputtime = await wrapperDiv.findElement(
+    By.css("input[id^='react-select'][id$='-input']")
+  );
+
+  await driver.sleep(500);
+  await inputtime.sendKeys(Key.ARROW_DOWN);
+  await driver.sleep(300);
+  await inputtime.sendKeys(Key.ENTER);
+  await driver.sleep(1000);
+
+  // Click on Age Range
+ // Locate all checkboxes inside the Age ranges section
+const checkboxes = await driver.wait(
+until.elementsLocated(By.css("div.mb-0.w-100 input[type='checkbox']")),
+10000
+);
+
+// Scroll into view and click the first checkbox
+await driver.executeScript(
+"arguments[0].scrollIntoView({block: 'center'});",
+checkboxes[0]
+);
+await driver.sleep(300);
+await checkboxes[0].click();
+
+  
+
+  // click on save button
+  const saveButtons = await driver.wait(
     until.elementLocated(
       By.xpath(
-        "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        "//button[contains(@class, 'modal-success-button') and normalize-space(text())='Save']"
       )
     ),
     10000
   );
 
-  await driver.wait(until.elementIsVisible(button), 5000);
-  await driver.wait(until.elementIsEnabled(button), 5000);
+  // Scroll and click
   await driver.executeScript(
     "arguments[0].scrollIntoView({block: 'center'});",
-    button
+    saveButtons
   );
   await driver.sleep(300);
+  await driver.executeScript("arguments[0].click();", saveButtons);
+  await driver.sleep(1000)
 
-  await driver.executeScript("arguments[0].click();", button);
- })
+  // click save and next button 
+  const saveAndNextButtonpricing = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+    ),
+    10000
+  );
+  
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveAndNextButtonpricing
+  );
+  await driver.sleep(300);
+  
+  await saveAndNextButtonpricing.click();
+  await driver.sleep(1000)
+})
+
+When("Extra - Max Unit, Description, Advance Setting And Save", async function(){
+  const addExtraButton = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[normalize-space(text())='Add Extra']")
+    ),
+    10000
+  );
+  
+  // Scroll into view
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    addExtraButton
+  );
+  await driver.sleep(300);
+  
+  // Click the button
+  await addExtraButton.click();
+  
+
+  // Enter Title 
+  const titleInputextra = await driver.wait(
+    until.elementLocated(
+      By.xpath("//label[normalize-space(text())='Title']/following-sibling::input")
+    ),
+    10000
+  );
+  
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    titleInputextra
+  );
+  await driver.sleep(300);
+  
+  // Enter title
+  await titleInputextra.sendKeys("Title for Testing");
+
+  // click on Max units per Boxing
+
+  const firstRadio = await driver.wait(
+    until.elementLocated(
+      By.xpath("//label[normalize-space(text())='Max units per boxing']/following-sibling::div//input[@type='radio'][1]")
+    ),
+    10000
+  );
+  
+  await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", firstRadio);
+  await driver.sleep(300);
+  await firstRadio.click();
+
+  // Enter Descriptio
+
+  const descriptionTextarea = await driver.wait(
+    until.elementLocated(
+      By.xpath("//label[normalize-space(text())='Description']/following-sibling::textarea")
+    ),
+    10000
+  );
+  
+  // Scroll into view
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    descriptionTextarea
+  );
+  await driver.sleep(300);
+  
+  // Enter your description
+  await descriptionTextarea.sendKeys("This is the description text.");
+  await driver.sleep(500)
+
+  // Enter Commission Input
+  const commissionInput = await driver.wait(
+    until.elementLocated(By.id("commissionGroup")),
+    10000
+  );
+  
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    commissionInput
+  );
+  await driver.sleep(300);
+  
+  await commissionInput.clear();
+  
+  await commissionInput.sendKeys("Your Commission Group Name");
+  await driver.sleep(500)
+
+  // click on save button 
+  const saveButtonextra = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[normalize-space(text())='Save']")
+    ),
+    10000
+  );
+  
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveButtonextra
+  );
+  await driver.sleep(300);
+  
+  await saveButtonextra.click();
+  await driver.sleep(1000)
+
+  // Click on Save and Next 
+
+  const saveNextButton = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+    ),
+    10000
+  );
+  
+  // Scroll into view if needed
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveNextButton
+  );
+  await driver.sleep(300);
+  
+  // Click the button
+  await saveNextButton.click();
+  await driver.sleep(1000)
+})
+
+When("Tasks & Resources - Add Title, Description, Time", async function(){
+  const addTasksButton = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[@type='button' and contains(@class, 'primary-btn') and normalize-space(text())='Add Tasks']")
+    ),
+    10000
+  );
+  
+  // Scroll into view if needed
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    addTasksButton
+  );
+  await driver.sleep(300);
+  
+  // Click the button
+  await addTasksButton.click();
+  await driver.sleep(1000)
+
+  // Enter Task name 
+
+  const taskInput = await driver.wait(
+    until.elementLocated(
+      By.xpath("//label[normalize-space(text())='Task Title']/following-sibling::input")
+    ),
+    10000
+  );
+  
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    taskInput
+  );
+  await driver.sleep(300);
+  
+  await taskInput.clear();
+  await taskInput.sendKeys("My Sample Task Name");
+  await driver.sleep(1000)
+
+  // Ener Desc
+
+  const descriptionTextareatask = await driver.wait(
+    until.elementLocated(By.id("description")),
+    10000
+  );
+  
+  // Scroll into view
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    descriptionTextareatask
+  );
+  await driver.sleep(300);
+  
+  // Clear and enter description
+  await descriptionTextareatask.clear();
+  await descriptionTextareatask.sendKeys("This is a sample task description.");
+  await driver.sleep(1000)
+
+  // Enter Time 
+
+  const startTimeInputTask = await driver.wait(
+    until.elementLocated(By.id("start-time")),
+    10000
+  );
+  
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    startTimeInputTask
+  );
+  await driver.sleep(300);
+  
+  await startTimeInputTask.clear();
+  await startTimeInputTask.sendKeys("04:25");
+  await driver.sleep(1000)
+
+  // Click on Save Button 
+
+  const saveButtonTask = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[contains(@class, 'modal-success-button') and normalize-space(text())='Save']")
+    ),
+    10000
+  );
+  
+  // Scroll into view
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveButtonTask
+  );
+  await driver.sleep(300);
+  
+  // Click the button
+  await saveButtonTask.click();
+  await driver.sleep(1000)
+
+  
+
+  // Select Resources 
+
+  const labelResources = await driver.wait(
+    until.elementLocated(
+      By.xpath("//label[normalize-space(text())='Resources']")
+    ),
+    10000
+  );
+  
+  // Locate the dropdown container using the label's parent context
+  const dropdownContainerres = await labelResources.findElement(
+    By.xpath("./following-sibling::div//div[contains(@class, 'css-b62m3t-container')]")
+  );
+  
+  const controlres = await dropdownContainerres.findElement(
+    By.css(".css-13cymwt-control")
+  );
+  
+  // Scroll into view and click to open dropdown
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    controlres
+  );
+  await driver.sleep(300);
+  await driver.executeScript("arguments[0].click();", controlres);
+  await driver.sleep(1000);
+  
+  // Find the input element inside the React Select component
+  const inputres = await dropdownContainerres.findElement(
+    By.css("input[id^='react-select'][id$='-input']")
+  );
+  
+  // Send keys to select the first option
+  await inputres.sendKeys(Key.ARROW_DOWN);
+  await driver.sleep(300);
+  await inputres.sendKeys(Key.ENTER);
+  await driver.sleep(2000);
+
+
+  // Click on Save & Next 
+
+  const saveAndNextButtonTask = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+    ),
+    10000
+  );
+  
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveAndNextButtonTask
+  );
+  await driver.sleep(300);
+  
+  await saveAndNextButtonTask.click();
+  await driver.sleep(1000)
+  const saveAndNextButtonfaq = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+    ),
+    10000
+  );
+  
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveAndNextButtonfaq
+  );
+  await driver.sleep(300);
+  
+  await saveAndNextButtonfaq.click();
+})
+
 
 
 // Step: Then the Tour should be created successfully

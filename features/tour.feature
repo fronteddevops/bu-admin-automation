@@ -25,7 +25,15 @@ Feature: Add Tour
     When Calender , Add Avaibility , Veiw Avaibility and Save
     When Pick And Drop - Select experience pickup places and Dropoff places
     When Incluson and Exclusion - Select include Experience and not include Experience
-    When Important Info- Select luggage available tour, Age Range , What to Bring , Cancelaltion Policy 
+    When Important Info- Select luggage available tour, Age Range , What to Bring , Cancelaltion Policy
+
+    When Know Before You Go - What should Traveller, Physicall Difficulty,Age Limit
+    When Route - Description
+    When Pricing - Enter Code, Title, Languages, Cancellation Policy, Start Time and Duration
+    When Extra - Max Unit, Description, Advance Setting And Save
+    When Tasks & Resources - Add Title, Description, Time and Faq
+
+
 
 
     
