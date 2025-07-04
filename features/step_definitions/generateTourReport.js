@@ -1,6 +1,5 @@
 const fs = require('fs');
 const reporter = require('cucumber-html-reporter');
-
 const jsonReportPath = 'reports/tour_report.json';
 
 if (!fs.existsSync(jsonReportPath)) {
