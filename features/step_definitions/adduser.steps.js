@@ -23,7 +23,6 @@ After(async function () {
 });
 
 Given('I am logged in as admin', { timeout: 180000 }, async function () {
-  console.log("Navigating to login page...");
   await driver.get('http://192.168.29.67:5173/kanban');
   const emailInput = await driver.wait(until.elementLocated(By.css("input[name='email'][placeholder='Email']")), 500);
   await driver.wait(until.elementIsVisible(emailInput), 10000);

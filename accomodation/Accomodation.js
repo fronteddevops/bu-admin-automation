@@ -1719,7 +1719,7 @@ const os = require("os");
     await driver.wait(until.elementIsVisible(priceInput), 5000);
 
     await driver.executeScript(
-      "arguments[0].scrollIntoView({block: 'center'});",
+      "arguments[0].scrollIntoView({block: 'center'});",  
       priceInput
     );
 
@@ -1857,6 +1857,8 @@ const os = require("os");
     await driver.wait(until.elementIsVisible(faqsaveandnext), 5000);
     await driver.wait(until.elementIsEnabled(faqsaveandnext), 5000);
     await faqsaveandnext.click();
+
+    await driver.sleep(20000)
     
 
     // click to save and next

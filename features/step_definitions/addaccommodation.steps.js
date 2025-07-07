@@ -1080,20 +1080,25 @@ When(
     await driver.sleep(1000);
 
     const saveAndNextBtn = await driver.wait(
-      until.elementLocated(By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")),
+      until.elementLocated(
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
+      ),
       10000
     );
-  
-    await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", saveAndNextBtn);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      saveAndNextBtn
+    );
     await driver.wait(until.elementIsVisible(saveAndNextBtn), 5000);
     await driver.wait(until.elementIsEnabled(saveAndNextBtn), 5000);
-  
+
     await saveAndNextBtn.click();
-    await driver.sleep(10000)
+    await driver.sleep(1000);
   }
 );
-
-
 
 When(
   "Incluson & Exclusion- Select Include Experience and Select not Inculde Experience",
@@ -1185,7 +1190,6 @@ When(
     await saveAndNextButtonex.click();
 
     // click on save button
-
     const saveButtondate = await driver.wait(
       until.elementLocated(
         By.xpath(
@@ -1205,5 +1209,809 @@ When(
     await driver.sleep(200);
 
     await saveButtondate.click();
+    await driver.sleep(500);
   }
 );
+
+When(
+  "Booking Off- Enter Weeks, Days, Hours, Minutes And Click on Save",
+  async function () {
+    // Enter Weeks
+    const weeksLabel = await driver.wait(
+      until.elementLocated(
+        By.xpath("//label[normalize-space(text())='Weeks']")
+      ),
+      10000
+    );
+
+    const weeksInput = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='Weeks']/following-sibling::input"
+        )
+      ),
+      10000
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      weeksInput
+    );
+    await weeksInput.click();
+    await weeksInput.clear();
+    await weeksInput.sendKeys("5");
+
+    // Enter Days
+    const daysLabel = await driver.wait(
+      until.elementLocated(By.xpath("//label[normalize-space(text())='Days']")),
+      10000
+    );
+
+    const daysInput = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='Days']/following-sibling::input"
+        )
+      ),
+      10000
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      daysInput
+    );
+    await daysInput.click();
+    await daysInput.clear();
+    await daysInput.sendKeys("4");
+
+    // Enter Hours
+    const hoursLabel = await driver.wait(
+      until.elementLocated(
+        By.xpath("//label[normalize-space(text())='Hours']")
+      ),
+      10000
+    );
+
+    const hoursInput = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='Hours']/following-sibling::input"
+        )
+      ),
+      10000
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      hoursInput
+    );
+    await hoursInput.click();
+    await hoursInput.clear();
+    await hoursInput.sendKeys("3");
+
+    // Enter Minutes
+    const minutesLabel = await driver.wait(
+      until.elementLocated(
+        By.xpath("//label[normalize-space(text())='Minutes']")
+      ),
+      10000
+    );
+
+    const minutesInput = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='Minutes']/following-sibling::input"
+        )
+      ),
+      10000
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      minutesInput
+    );
+    await minutesInput.click();
+    await minutesInput.clear();
+    await minutesInput.sendKeys("1");
+
+    await driver.sleep(500);
+
+    // Click on Save Button
+    const saveButton = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save']"
+        )
+      ),
+      10000
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      saveButton
+    );
+    await saveButton.click();
+  }
+);
+
+When("Check In & Check out Time- Add Time", async function () {
+  const addTimeButton = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//button[normalize-space(text())='Add Start - Time / Duration' and contains(@class, 'primary-btn')]"
+      )
+    ),
+    10000
+  );
+
+  await driver.wait(until.elementIsVisible(addTimeButton), 5000);
+  await driver.wait(until.elementIsEnabled(addTimeButton), 5000);
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    addTimeButton
+  );
+  await driver.sleep(200);
+
+  await addTimeButton.click();
+
+  // click on check In timer
+
+  const checkInTimeInput = await driver.wait(
+    until.elementLocated(By.id("checkIn-time")),
+    10000
+  );
+
+  // Wait for visibility and that it's enabled
+  await driver.wait(until.elementIsVisible(checkInTimeInput), 5000);
+  await driver.wait(until.elementIsEnabled(checkInTimeInput), 5000);
+
+  // Scroll it into view and click it
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    checkInTimeInput
+  );
+  await driver.sleep(200);
+  await checkInTimeInput.click();
+  await checkInTimeInput.sendKeys("10:30");
+
+  await driver.sleep(2000);
+
+  // click on check Out timer
+
+  const checkOutTimeInput = await driver.wait(
+    until.elementLocated(By.id("  Check-Out-Time")),
+    10000
+  );
+
+  // Wait for visibility and that it's enabled
+  await driver.wait(until.elementIsVisible(checkOutTimeInput), 5000);
+  await driver.wait(until.elementIsEnabled(checkOutTimeInput), 5000);
+
+  // Scroll it into view and click it
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    checkOutTimeInput
+  );
+  await driver.sleep(200);
+  await checkOutTimeInput.click();
+  await checkOutTimeInput.sendKeys("18:30");
+
+  await driver.sleep(2000);
+
+  // click on save button
+  const saveButtons = await driver.wait(
+    until.elementLocated(By.css("button.modal-success-button")),
+    3000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveButtons
+  );
+  await driver.sleep(2000);
+
+  await saveButtons.click();
+
+  // save and next button
+
+  const saveAndNextBtn = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//button[normalize-space(text())='Save and Next' and contains(@class, 'save-and-next-button')]"
+      )
+    ),
+    10000
+  );
+
+  // Wait until the button is visible and enabled
+  await driver.wait(until.elementIsVisible(saveAndNextBtn), 5000);
+  await driver.wait(until.elementIsEnabled(saveAndNextBtn), 5000);
+
+  // Scroll into view and click
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveAndNextBtn
+  );
+  await driver.sleep(200);
+  await saveAndNextBtn.click();
+});
+
+When(
+  "Calender- Click Add Avaibiliy, Select Avaibility Rule,Select End Date, Affected Days, Select Rule Color,And Click on Save",
+  async function () {
+    const addAvailabilityBtn = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//button[normalize-space(text())='Add Availability' and contains(@class, 'primary-btn')]"
+        )
+      ),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(addAvailabilityBtn), 5000);
+    await driver.wait(until.elementIsEnabled(addAvailabilityBtn), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      addAvailabilityBtn
+    );
+    await driver.sleep(200);
+    await addAvailabilityBtn.click();
+
+    // Add Availability
+    const labelavaibility = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//label[normalize-space(text())='Select the Type of Availability Rule']"
+        )
+      ),
+      10000
+    );
+
+    const containeravaibility = await labelavaibility.findElement(
+      By.xpath(
+        "./following-sibling::div[contains(@class, 'css-b62m3t-container')]"
+      )
+    );
+
+    const selectControlavaibility = await containeravaibility.findElement(
+      By.css(".css-13cymwt-control")
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      selectControlavaibility
+    );
+    await driver.sleep(200);
+    await selectControlavaibility.click();
+
+    const inputavaibility = await containeravaibility.findElement(
+      By.css("input[id^='react-select'][id$='-input']")
+    );
+
+    await inputavaibility.sendKeys(Key.ARROW_DOWN);
+    await driver.sleep(2000);
+    await inputavaibility.sendKeys(Key.ARROW_DOWN);
+    await driver.sleep(2000);
+    await inputavaibility.sendKeys(Key.ARROW_DOWN);
+    await driver.sleep(2000);
+    await inputavaibility.sendKeys(Key.ENTER);
+
+    // click outside
+    await driver.executeScript("document.body.click()");
+    await driver.sleep(300); // wait for dropdown to disappear
+    // await driver.executeScript("alert('This is a test alert');");
+
+    // Now proceed to click the date input
+    // await dateInput.click();
+
+    // date
+
+    try {
+      const blockingElement = await driver.findElement(
+        By.css(".css-10wo9uf-option")
+      );
+      await driver.executeScript("document.body.click()");
+      await driver.wait(until.stalenessOf(blockingElement), 5000);
+    } catch (err) {
+      // If dropdown not found or already closed, ignore
+    }
+
+    // Step 1: Find the date input using label-relative XPath
+    // const dateInput = await driver.wait(
+    //   until.elementLocated(
+    //     By.xpath("#kt_app_body > div.fade.modal-container.modal.show > div > div > div.modal-body > div > div:nth-child(1) > div:nth-child(2) > div.react-datepicker-wrapper > div > input")
+    //   ),
+    //   10000
+    // );
+
+    const dateInput = await driver.wait(
+      until.elementLocated(
+        By.css(
+          "#kt_app_body .modal.show .modal-body > div > div:nth-child(1) > div:nth-child(2) .react-datepicker-wrapper > div > input"
+        )
+      ),
+      10000
+    );
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      dateInput
+    );
+    await driver.wait(until.elementIsVisible(dateInput), 3000);
+    await driver.wait(until.elementIsEnabled(dateInput), 3000);
+
+    await driver.sleep(200);
+    await dateInput.click();
+
+    const day26 = await driver.wait(
+      until.elementLocated(By.css(".react-datepicker__day--026")),
+      10000
+    );
+
+    await day26.click();
+
+    const patch = await driver.wait(
+      until.elementLocated(By.css(".color-purple")),
+      10000
+    );
+
+    await patch.click();
+
+    // click on save button
+    const saveButtonavaibility = await driver.wait(
+      until.elementLocated(By.css("button.modal-success-button.w-100")),
+      10000
+    );
+
+    await saveButtonavaibility.click();
+
+    // click on view availability button
+    const viewAvailabilityButton = await driver.wait(
+      until.elementLocated(By.xpath("//button[text()='View Availability']")),
+      10000
+    );
+
+    await viewAvailabilityButton.click();
+
+    const closeButton = await driver.wait(
+      until.elementLocated(By.css("button.btn-close")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(closeButton), 5000);
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      closeButton
+    );
+    await driver.sleep(500);
+    await driver.executeScript("arguments[0].click();", closeButton);
+
+    // click on save button
+    const saveButtonavaibilities = await driver.wait(
+      until.elementLocated(By.css("button.save-and-next-button")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(saveButtonavaibilities), 5000);
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      saveButtonavaibilities
+    );
+    await saveButtonavaibilities.click();
+  }
+);
+
+When(
+  "Pricing- Add Rate- Enter Code , Title, Start Date, End Date, Description, and Save",
+  async function () {
+    const addRateButton = await driver.wait(
+      until.elementLocated(By.xpath("//button[text()='Add Rate']")),
+      10000
+    );
+    await addRateButton.click();
+    await driver.sleep(1000);
+
+    // click on code
+
+    const codeInputs = await driver.wait(
+      until.elementLocated(By.css("input#code")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(codeInputs), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      codeInputs
+    );
+
+    await codeInputs.clear();
+
+    await codeInputs.sendKeys("ex5454");
+    await driver.sleep(1000);
+
+    // enter title
+    const titleInputdata = await driver.wait(
+      until.elementLocated(By.css("input#Title")),
+      10000
+    );
+
+    console.log("titleInput:", titleInputdata);
+
+    await driver.wait(until.elementIsVisible(titleInputdata), 5000);
+    console.log("titleInput:", titleInputdata);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      titleInputdata
+    );
+
+    await titleInputdata.clear();
+
+    await titleInputdata.sendKeys("My Sample Title");
+
+    // click on start date
+    const dateInputdata = await driver.wait(
+      until.elementLocated(By.css("input#start-time")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(dateInputdata), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      dateInputdata
+    );
+
+    await dateInputdata.click();
+    await dateInputdata.sendKeys("01-07-2025");
+    await driver.sleep(10000);
+
+    // end date
+
+    const enddateInputdata = await driver.wait(
+      until.elementLocated(By.css("input#end-time")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(enddateInputdata), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      enddateInputdata
+    );
+
+    await enddateInputdata.click();
+    await enddateInputdata.sendKeys("01-12-2025");
+    await driver.sleep(1000);
+
+    // click on description
+
+    const descriptionInput = await driver.wait(
+      until.elementLocated(By.css("input#Description")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(descriptionInput), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      descriptionInput
+    );
+
+    await descriptionInput.clear();
+
+    await descriptionInput.sendKeys("This is a sample task description.");
+
+    const memberInput = await driver.wait(
+      until.elementLocated(By.css("input#member")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(memberInput), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      memberInput
+    );
+
+    await memberInput.clear();
+
+    await memberInput.sendKeys("3");
+
+    // enter price
+
+    const priceInput = await driver.wait(
+      until.elementLocated(By.css("input#MaxPrice")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(priceInput), 5000);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      priceInput
+    );
+
+    await priceInput.clear();
+
+    await priceInput.sendKeys("25450");
+
+    // const saveButtonses = await driver.wait(
+    //   until.elementLocated(
+    //     By.xpath(
+    //       "//button[contains(@class, 'modal-success-button') and text()='Save']"
+    //     )
+    //   ),
+    //   10000
+    // );
+
+    // await driver.wait(until.elementIsVisible(saveButtonses), 5000);
+    // await driver.executeScript(
+    //   "arguments[0].scrollIntoView({block: 'center'});",
+    //   saveButtonses
+    // );
+
+    // await saveButtonses.click();
+    // const saveButtonsession = await driver.wait(
+    //     until.elementLocated(By.css("button.modal-success-button")),
+    //     10000 // timeout in milliseconds
+    //   );
+
+    //   console.log
+
+    //   await driver.wait(until.elementIsVisible(saveButtonsession), 5000);
+    //   await driver.wait(until.elementIsEnabled(saveButtonsession), 5000);
+    //   await saveButtonsession.click();
+    await driver.sleep(1000);
+    const saveButtonq = await driver.findElement(
+      By.xpath(
+        '//div[contains(@class, "modal-footer")]//button[contains(@class, "modal-success-button") and text()="Save"]'
+      )
+    );
+    // const buttonText = await saveButtonq.getText(); // Get button's visible text
+    await saveButtonq.click();
+
+    const closeButtonmodal = await driver.findElement(
+      By.xpath('//button[@class="btn-close" and @aria-label="Close"]')
+    );
+    console.log("closeButtonmodal", closeButtonmodal);
+    await closeButtonmodal.click();
+
+    const saveNxtButton = await driver.wait(
+      until.elementLocated(By.css("button.save-and-next-button")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(saveNxtButton), 5000);
+    await driver.wait(until.elementIsEnabled(saveNxtButton), 5000);
+
+    // Click the button
+    await saveNxtButton.click();
+    await driver.sleep(1000);
+  }
+);
+
+When(
+  "Task & Resources- Click on Add Task, Enter Title Task , Description, Start Time,  and Click on Save",
+  async function () {
+    // click on Add Task
+    const addTasksBtn = await driver.wait(
+      until.elementLocated(By.xpath('//button[text()="Add Tasks"]')),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(addTasksBtn), 5000);
+    await driver.wait(until.elementIsEnabled(addTasksBtn), 5000);
+    await addTasksBtn.click();
+    await driver.sleep(1000);
+
+    const addtitleInput = await driver.wait(
+      until.elementLocated(By.xpath('//input[@placeholder="enter title"]')),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(addtitleInput), 5000);
+    await driver.wait(until.elementIsEnabled(addtitleInput), 5000);
+
+    await addtitleInput.click();
+    await addtitleInput.clear();
+    await addtitleInput.sendKeys("Your Task Title Here");
+
+    // add description
+    await driver.sleep(2000);
+    const descriptionBox = await driver.wait(
+      until.elementLocated(By.id("description")),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(descriptionBox), 5000);
+    await driver.wait(until.elementIsEnabled(descriptionBox), 5000);
+
+    await descriptionBox.click();
+    await descriptionBox.clear();
+    await descriptionBox.sendKeys("Your task description goes here");
+    await driver.sleep(2000);
+
+    // Start Time
+    const startTimeInput = await driver.wait(
+      until.elementLocated(By.id("start-time")),
+      10000
+    );
+
+    await driver.sleep(1000);
+
+    await driver.wait(until.elementIsVisible(startTimeInput), 5000);
+    await driver.wait(until.elementIsEnabled(startTimeInput), 5000);
+
+    await startTimeInput.click();
+    await startTimeInput.clear(); //
+    await driver.sleep(2000);
+    await startTimeInput.sendKeys("04:50");
+    await driver.sleep(1000);
+
+    // click on save button
+    const saveButtonTask = await driver.wait(
+      until.elementLocated(By.xpath('//button[text()="Save"]')),
+      10000
+    );
+
+    await driver.wait(until.elementIsVisible(saveButtonTask), 5000);
+    await driver.wait(until.elementIsEnabled(saveButtonTask), 5000);
+
+    await saveButtonTask.click();
+    await driver.sleep(1000);
+
+    const faqsaveandnext = await driver.findElement(
+      By.xpath(
+        "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+      )
+    );
+    await driver.executeScript(
+      "arguments[0].scrollIntoView(true);",
+      faqsaveandnext
+    );
+    await driver.wait(until.elementIsVisible(faqsaveandnext), 5000);
+    await driver.wait(until.elementIsEnabled(faqsaveandnext), 5000);
+    await faqsaveandnext.click();
+    await driver.sleep(1000);
+
+    let saveAndNextButton = await driver.wait(
+      until.elementLocated(
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
+      ),
+      10000
+    );
+
+    // Scroll into view
+    await driver.executeScript(
+      "arguments[0].scrollIntoView(true);",
+      saveAndNextButton
+    );
+
+    // Ensure it's visible and enabled before clicking
+    await driver.wait(until.elementIsVisible(saveAndNextButton), 5000);
+    await driver.wait(until.elementIsEnabled(saveAndNextButton), 5000);
+
+    await saveAndNextButton.click();
+
+    await driver.sleep(500);
+  }
+);
+
+When("Select Action and Activate", async function () {
+  let dropdownButton = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[contains(text(),'Select Action')]")
+    ),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView(true);",
+    dropdownButton
+  );
+  await driver.wait(until.elementIsVisible(dropdownButton), 5000);
+  await dropdownButton.click();
+
+  let firstItem = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//ul[@aria-labelledby='dropdownMenuButton1']//div[@class='dropdown-item' and normalize-space(text())='Active Product']"
+      )
+    ),
+    5000
+  );
+
+  await driver.wait(until.elementIsVisible(firstItem), 5000);
+  await firstItem.click();
+  await driver.sleep(500);
+  let accommodationButton = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//button[contains(@class, 'btn') and normalize-space(text())='Accommodation']"
+      )
+    ),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    accommodationButton
+  );
+
+  await driver.wait(until.elementIsVisible(accommodationButton), 5000);
+  await driver.wait(until.elementIsEnabled(accommodationButton), 5000);
+
+  await accommodationButton.click();
+  await driver.sleep(500)
+});
+
+When("Delete Added Data", async function () {
+  // const targetCode = "exp-324";
+  // const deleteButton = await driver.wait(
+  //   until.elementLocated(
+  //     By.xpath(
+  //       `//tr[td[normalize-space(text())='${targetCode}']]//button[contains(@class, 'table-icon-remove')]`
+  //     )
+  //   ),
+  //   10000
+  // );
+
+  // await driver.executeScript(
+  //   "arguments[0].scrollIntoView({block: 'center'});",
+  //   deleteButton
+  // );
+
+  // await deleteButton.click();
+  // await driver.sleep(10000)
+
+  //////////////////////////////////////
+  let searchInput = await driver.wait(
+    until.elementLocated(
+      By.xpath("//input[@type='text' and @name='search' and @placeholder='Search...']")
+    ),
+    10000
+  );
+  
+  await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", searchInput);
+  
+  await searchInput.clear();
+  await searchInput.sendKeys("exp-324");
+  await driver.sleep(10000)
+
+
+  // Click on Delete Button 
+  let deleteButton = await driver.wait(
+    until.elementLocated(
+      By.xpath("//tr[td[contains(text(),'exp-324')]]//button[contains(@class, 'table-icon-remove')]")
+    ),
+    5000
+  );
+  
+  await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", deleteButton);
+  await driver.wait(until.elementIsVisible(deleteButton), 5000);
+  await deleteButton.click();
+  await driver.sleep(2000)
+
+  // Click on  Yes Button for confirm Delete
+    let yesButton = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[contains(@class, 'modal-success-button') and normalize-space(text())='Yes']")
+    ),
+    5000
+  );
+  
+  await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", yesButton);
+  
+  await driver.wait(until.elementIsVisible(yesButton), 5000);
+  await driver.wait(until.elementIsEnabled(yesButton), 5000);
+  
+  await yesButton.click();
+
+  
+});

@@ -19,7 +19,6 @@ setDefaultTimeout(60 * 1000);
 
 // Setup browser before each scenario
 Before(async function () {
-  console.log("Launching browser...");
   let options = new chrome.Options();
   // Remove or comment out the headless argument:
   // options.addArguments('--headless', '--no-sandbox', '--disable-dev-shm-usage');
