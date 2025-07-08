@@ -26,7 +26,7 @@ After(async function () {
 });
 
 Given(
-  "I am logged in as Admin For GmailReply",
+  "I am logged in as Admin For Gmail Compose",
   { timeout: 180000 },
   async function () {
     await driver.get(
@@ -221,10 +221,117 @@ When("Click on First indexing Email on To Do", async function () {
   await driver.sleep(300);
 
   await firstTask.click();
+  await driver.sleep(1000);
 });
 
+When("Click on Compose Email Icon", async function () {
+  const composeIcon = await driver.wait(
+    until.elementLocated(By.xpath("//span[@title='Compose']")),
+    10000
+  );
 
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+    composeIcon
+  );
+  await driver.sleep(300);
+  await composeIcon.click();
+  await driver.sleep(2000);
+});
 
+When("Enter Sender Email", async function () {
+  const toInput = await driver.wait(
+    until.elementLocated(By.id("recipients")),
+    10000
+  );
 
+  // Click and clear the field (optional)
+  await toInput.click();
+  await toInput.clear();
 
+  // Enter the email address
+  await toInput.sendKeys("applatus.sandeepsingh@gmail.com");
+});
 
+When("Enter Subject", async function () {
+  const subjectInput = await driver.wait(
+    until.elementLocated(By.id("subject")),
+    10000
+  );
+
+  // Click and clear the field (optional)
+  await subjectInput.click();
+  await subjectInput.clear();
+
+  await subjectInput.sendKeys("testing bu - admin");
+});
+
+When("Select Template", async function () {
+  const label = await driver.wait(
+    until.elementLocated(
+      By.xpath("//label[normalize-space(text())='Template']")
+    ),
+    10000
+  );
+
+  const selectElement = await label.findElement(
+    By.xpath("./following-sibling::select | ../select")
+  );
+
+  await selectElement.click();
+
+  await selectElement
+    .findElement(By.xpath("./option[normalize-space(text())='Test_kanban']"))
+    .click();
+  await driver.sleep(2000);
+});
+
+When("Add Text in Email Body", async function () {
+  const editor = await driver.wait(
+    until.elementLocated(
+      By.css(".ck-editor__editable[contenteditable='true']")
+    ),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    editor
+  );
+  await driver.sleep(300);
+  await driver.executeScript("arguments[0].focus();", editor);
+  await driver.sleep(100);
+  await editor.sendKeys(Key.SPACE, "compose email");
+});
+
+When("Add File", async function () {
+  const downloadsFolder = path.join(os.homedir(), "Downloads");
+  const imagePath = path.join(downloadsFolder, "dummy.pdf");
+
+  const fileInput = await driver.wait(
+    until.elementLocated(By.css("input[type='file']")),
+    10000
+  );
+
+  await fileInput.sendKeys(imagePath);
+  await driver.sleep(5000);
+});
+
+When("click on Send Email", async function () {
+  const sendButton = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//button[contains(@class, 'bg-blue-600') and normalize-space(text())='Send']"
+      )
+    ),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    sendButton
+  );
+  await driver.sleep(300);
+  await sendButton.click();
+  await driver.sleep(10000);
+});
