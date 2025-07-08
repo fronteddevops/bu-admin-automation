@@ -92,20 +92,18 @@ Then("Select Email", async function () {
   );
 
   await driver.wait(until.elementIsVisible(searchInput), 5000);
-
   await searchInput.sendKeys("applatus.isha@gmail.com");
   await driver.sleep(3000);
-
   await searchInput.sendKeys(Key.ARROW_DOWN);
   await driver.sleep(3000);
   await searchInput.sendKeys(Key.ARROW_DOWN);
   await driver.sleep(3000);
-
   await searchInput.sendKeys(Key.ENTER);
   await driver.sleep(3000);
+  await driver.sleep(3000);
+});
 
-  await driver.sleep(10000);
-
+When("First indexing Email Drag and Drop on To Do", async function () {
   const allDraggableEmails = await driver.wait(
     until.elementsLocated(
       By.xpath("//div[@class='inbox-Mail']//div[@draggable='true']")
@@ -124,10 +122,6 @@ Then("Select Email", async function () {
     10000
   );
 
-  //  From the "To Do" section, find its related drop button
-  //   const dropTarget = await todoSection.findElement(By.css(".task.task-curve .add-task-button"));
-  
-
   const draggableEmail = await driver.wait(
     until.elementLocated(
       By.xpath("(//div[@class='inbox-Mail']//div[@draggable='true'])[1]")
@@ -144,7 +138,6 @@ Then("Select Email", async function () {
     todoSection
   );
 
-  // Perform drag and drop
   const actions = driver.actions({ async: true });
   await actions
     .move({ origin: draggableEmail })
@@ -155,25 +148,51 @@ Then("Select Email", async function () {
     .perform();
 
   await driver.sleep(5000);
-  const firstTask = await driver.wait(
+});
+
+When("Click on Deadline and select today", async function () {
+  const todoDroptarget = await driver.wait(
     until.elementLocated(
-      By.xpath("(//div[contains(@class,'inbox-Task-scroll')]//div[@draggable='true'])[1]")
+      By.xpath(
+        "//div[contains(@class,'droptarget') and .//span[normalize-space(text())='To Do']]"
+      )
     ),
     10000
   );
-  
-  // 2. Click the task to open or activate it
-  await firstTask.click();
-  await driver.sleep(500); // Small wait to allow UI to respond
-  
-  // 3. Locate the "Deadline" span and click it
-  const deadlineButton = await driver.wait(
-    until.elementLocated(
-      By.xpath("//span[normalize-space(text())='Deadline']")
-    ),
-    10000
+
+  const deadlineButton = await todoDroptarget.findElement(
+    By.xpath(
+      ".//span[contains(@class,'deadline-btn') and normalize-space(text())='Deadline']"
+    )
   );
-  
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'})",
+    deadlineButton
+  );
+  await driver.sleep(300);
   await deadlineButton.click();
-  await driver.sleep(500);
+  await driver.sleep(3000);
+
+  // Click on Today
+  const todoDroptargets = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//div[contains(@class,'droptarget') and .//span[normalize-space(text())='To Do']]"
+      )
+    ),
+    10000
+  );
+
+  const todayButton = await todoDroptargets.findElement(
+    By.css(".text-listdrop.daysof-week")
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'})",
+    todayButton
+  );
+  await driver.sleep(300);
+  await todayButton.click();
+  await driver.sleep(10000);
 });
