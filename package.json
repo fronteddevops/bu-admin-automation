@@ -10,7 +10,11 @@
     "test:addtour": "cucumber-js features/tour.feature --require features/step_definitions/tour.steps.js --format json:reports/tour_report.json && npm run report:tour",
     "test:with-report": "npm run test:cucumber && npm run report:tour",
     "test:accommodation": "cucumber-js features/addaccommodation.feature --require features/step_definitions/addaccommodation.steps.js --format json:reports/addaccommodation_report.json",
-    "report:accommodation" : "node features/step_definitions/accommodationReport.js"
+    "report:accommodation": "node features/step_definitions/accommodationReport.js",
+    "test:flights": "cucumber-js features/flight.feature --require features/step_definitions/flight.steps.js --format json:reports/flight_report.json",
+    "report:flights": "node features/step_definitions/flight.js",
+     "test:gmailreply": "cucumber-js features/gmailreply.feature --require features/step_definitions/gmailreply.steps.js --format json:reports/gmailreply_report.json",
+    "report:gmailreply": "node features/step_definitions/gmailreplyReport.js"
   },
   "keywords": [],
   "author": "",
