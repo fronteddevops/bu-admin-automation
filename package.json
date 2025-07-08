@@ -14,7 +14,9 @@
     "test:flights": "cucumber-js features/flight.feature --require features/step_definitions/flight.steps.js --format json:reports/flight_report.json",
     "report:flights": "node features/step_definitions/flight.js",
      "test:gmailreply": "cucumber-js features/gmailreply.feature --require features/step_definitions/gmailreply.steps.js --format json:reports/gmailreply_report.json",
-    "report:gmailreply": "node features/step_definitions/gmailreplyReport.js"
+    "report:gmailreply": "node features/step_definitions/gmailreplyReport.js",
+     "test:gmailcompose": "cucumber-js features/gmailcompose.feature --require features/step_definitions/gmailreply.steps.js --format json:reports/gmailreply_report.json",
+    "report:gmailcompose": "node features/step_definitions/gmailreplyReport.js"
   },
   "keywords": [],
   "author": "",
