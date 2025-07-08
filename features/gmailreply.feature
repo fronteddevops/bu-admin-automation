@@ -5,5 +5,10 @@ Feature: Gmail Reply
     Then Select Email
     When First indexing Email Drag and Drop on To Do
     When Click on Deadline and select today
-    
+    And Click on First indexing Email on To Do
+    When Click on Reply Button
+    When Select Template
+    When Enter Reply Message
+    And file Attache- Attache Pdf File
+
     

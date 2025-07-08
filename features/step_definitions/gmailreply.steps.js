@@ -196,3 +196,85 @@ When("Click on Deadline and select today", async function () {
   await todayButton.click();
   await driver.sleep(10000);
 });
+
+When("Click on First indexing Email on To Do", async function () {
+  const todoDroptarget = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//div[contains(@class,'droptarget') and .//span[normalize-space(text())='To Do']]"
+      )
+    ),
+    10000
+  );
+
+  await todoDroptarget.click();
+  await driver.sleep(10000);
+});
+
+When("Click on Reply Button", async function () {
+  const replyButton = await driver.wait(
+    until.elementLocated(By.xpath("//button[normalize-space(text())='Reply']")),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'})",
+    replyButton
+  );
+  await driver.sleep(300);
+  await replyButton.click();
+  await driver.sleep(10000);
+});
+
+When("Select Template", async function () {
+  const selectElement = await driver.wait(
+    until.elementLocated(By.css("select.w-\\[300px\\]")),
+    10000
+  );
+
+  const options = await selectElement.findElements(By.tagName("option"));
+
+  if (options.length > 1) {
+    await options[1].click();
+  }
+  await driver.sleep(5000);
+});
+
+When("Enter Reply Message", async function () {
+  const editor = await driver.wait(
+    until.elementLocated(By.css("div[role='textbox'].ck-editor__editable")),
+    10000
+  );
+
+  await editor.click();
+  await driver.sleep(300);
+  await editor.sendKeys(Key.SPACE);
+  await driver.sleep(200);
+  await editor.sendKeys("checking and testing by email reply");
+  await driver.executeScript("window.scrollBy(0, 500);"); 
+await driver.sleep(300);
+
+});
+
+When("file Attache- Attache Pdf File", async function () {
+//   const downloadsFolder = path.join(os.homedir(), "Downloads");
+//   const imagePath = path.join(downloadsFolder, "dummy.pdf");
+
+//   const fileInput = await driver.wait(
+//     until.elementLocated(By.css("input[type='file']")),
+//     10000
+//   );
+//   await fileInput.sendKeys(imagePath);
+
+//   await driver.sleep(5000);
+  const sendButton = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[normalize-space(text())='Send']")
+    ),
+    10000
+  );
+  
+  // Click the Send button
+  await sendButton.click();
+  await driver.sleep(40000)
+});
