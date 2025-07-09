@@ -6,7 +6,7 @@ const os = require("os");
   let driver = await new Builder().forBrowser("chrome").build();
   try {
     await driver.manage().window().maximize();
-    await driver.get("http://192.168.29.67:5173/kanban");
+    await driver.get("http://192.168.29.67:3000/kanban");
     const emailInput = await driver.wait(
       until.elementLocated(By.css("input[name='email'][placeholder='Email']")),
       10000

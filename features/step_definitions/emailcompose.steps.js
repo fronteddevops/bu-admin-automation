@@ -8,6 +8,8 @@ const {
   setDefaultTimeout,
 } = require("@cucumber/cucumber");
 const path = require("path");
+const fs = require("fs");
+
 const os = require("os");
 const chromedriver = require("chromedriver");
 let driver;
@@ -29,9 +31,7 @@ Given(
   "I am logged in as Admin For Gmail Compose",
   { timeout: 180000 },
   async function () {
-    await driver.get(
-      "http://kanban-atpl-dev.s3-website.ap-south-1.amazonaws.com/login"
-    );
+    await driver.get("http://kanban-atpl-dev.s3-website.ap-south-1.amazonaws.com/app");
 
     const selectEmail = await driver.wait(
       until.elementLocated(
@@ -251,6 +251,7 @@ When("Enter Sender Email", async function () {
 
   // Enter the email address
   await toInput.sendKeys("applatus.sandeepsingh@gmail.com");
+  await driver.sleep(2000);
 });
 
 When("Enter Subject", async function () {
@@ -264,9 +265,27 @@ When("Enter Subject", async function () {
   await subjectInput.clear();
 
   await subjectInput.sendKeys("testing bu - admin");
+  await driver.sleep(2000);
 });
 
 When("Select Template", async function () {
+  // const label = await driver.wait(
+  //   until.elementLocated(
+  //     By.xpath("//label[normalize-space(text())='Template']")
+  //   ),
+  //   10000
+  // );
+
+  // const selectElement = await label.findElement(
+  //   By.xpath("./following-sibling::select | ../select")
+  // );
+
+  // await selectElement.click();
+
+  // await selectElement
+  //   .findElement(By.xpath("./option[normalize-space(text())='Test_kanban']"))
+  //   .click();
+  // await driver.sleep(2000);
   const label = await driver.wait(
     until.elementLocated(
       By.xpath("//label[normalize-space(text())='Template']")
@@ -278,43 +297,127 @@ When("Select Template", async function () {
     By.xpath("./following-sibling::select | ../select")
   );
 
+  // Click the dropdown to open (optional)
   await selectElement.click();
 
-  await selectElement
-    .findElement(By.xpath("./option[normalize-space(text())='Test_kanban']"))
-    .click();
+  // Select the first <option> (index 0)
+  const firstOption = await selectElement.findElement(
+    By.css("option:nth-child(1)")
+  );
+  await firstOption.click();
+
   await driver.sleep(2000);
 });
 
 When("Add Text in Email Body", async function () {
-  const editor = await driver.wait(
-    until.elementLocated(
-      By.css(".ck-editor__editable[contenteditable='true']")
-    ),
-    10000
+  // const editor = await driver.wait(
+  //   until.elementLocated(
+  //     By.css(".ck-editor__editable[contenteditable='true']")
+  //   ),
+  //   10000
+  // );
+
+  // await driver.executeScript(
+  //   "arguments[0].scrollIntoView({block: 'center'});",
+  //   editor
+  // );
+  // await driver.sleep(300);
+  // await driver.executeScript("arguments[0].focus();", editor);
+  // await driver.sleep(100);
+  // await editor.sendKeys(Key.SPACE, "compose email");
+  // await driver.sleep(10000)
+  const editors = await driver.findElements(
+    By.css("div[contenteditable='true'].ck-editor__editable")
   );
 
-  await driver.executeScript(
-    "arguments[0].scrollIntoView({block: 'center'});",
-    editor
-  );
-  await driver.sleep(300);
-  await driver.executeScript("arguments[0].focus();", editor);
-  await driver.sleep(100);
-  await editor.sendKeys(Key.SPACE, "compose email");
+  // If more than 1, pick the visible one
+  for (const ed of editors) {
+    const displayed = await ed.isDisplayed();
+    if (displayed) {
+      await driver.executeScript(
+        "arguments[0].scrollIntoView({block: 'center'});",
+        ed
+      );
+      await driver.executeScript("arguments[0].focus();", ed);
+      break;
+    }
+  }
+  await driver.sleep(2000);
 });
 
 When("Add File", async function () {
-  const downloadsFolder = path.join(os.homedir(), "Downloads");
-  const imagePath = path.join(downloadsFolder, "dummy.pdf");
 
+  // const uploadLabel = await driver.findElement(
+  //   By.css("label[data-tooltip-id='upload-tooltip']")
+  // );
+  
+  // await driver.executeScript("document.activeElement.blur();");
+  
+  // await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", uploadLabel);
+  
+  // await driver.sleep(300);
+  
+  // await driver.executeScript("arguments[0].click();", uploadLabel);
+  
+  
+  // await driver.sleep(600000)  
+  const downloadsFolder = path.join(os.homedir(), "Downloads");
+  const imagePath = path.join(downloadsFolder, "istockphoto-1798864003-2048x2048.jpg");
+  
+  if (!fs.existsSync(imagePath)) {
+    console.error("❌ File does not exist:", imagePath);
+    process.exit(1);
+  }
+  
   const fileInput = await driver.wait(
-    until.elementLocated(By.css("input[type='file']")),
+    until.elementLocated(
+      By.css("label[data-tooltip-id='upload-tooltip'] input[type='file']")
+    ),
     10000
   );
-
+  
+  console.log("Uploading file:", imagePath);
   await fileInput.sendKeys(imagePath);
-  await driver.sleep(5000);
+  
+  // Force React to pick up the change
+  await driver.executeScript(`
+    const input = arguments[0];
+    const event = new Event('change', { bubbles: true });
+    input.dispatchEvent(event);
+  `, fileInput);
+  
+  // Optional: wait to see UI update
+  await driver.sleep(3000);
+  
+  
+  
+  // Verify uploaded file name (optional)
+  const fileName = await driver.executeScript(
+    "return arguments[0].files[0]?.name;",
+    fileInput
+  );
+  console.log("✅ Uploaded file:", fileName);
+  
+  // Preview wait (optional)
+  await driver.sleep(3000);
+
+  // const fileInput = await driver.wait(
+  //   until.elementLocated(By.css("input[type='file']")),
+  //   10000
+  // );
+  // const fileInput = await driver.findElement(By.css("input[type='file']"));
+//   const fileInput = await driver.findElement(
+//     By.css(
+//       "label[for='upload-tooltip'] input[type='file'], label[data-tooltip-id='upload-tooltip'] input[type='file']"
+//     )
+//   );
+
+//   const selectedPath = await driver.executeScript("return arguments[0].value;", fileInput);
+// console.log("Selected file path (from input.value):", selectedPath);
+
+
+//   await fileInput.sendKeys(imagePath);
+  await driver.sleep(10000);
 });
 
 When("click on Send Email", async function () {
