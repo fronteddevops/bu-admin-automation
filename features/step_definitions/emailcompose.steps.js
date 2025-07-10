@@ -9,7 +9,6 @@ const {
 } = require("@cucumber/cucumber");
 const path = require("path");
 const fs = require("fs");
-
 const os = require("os");
 const chromedriver = require("chromedriver");
 let driver;
@@ -31,7 +30,9 @@ Given(
   "I am logged in as Admin For Gmail Compose",
   { timeout: 180000 },
   async function () {
-    await driver.get("http://kanban-atpl-dev.s3-website.ap-south-1.amazonaws.com/app");
+    await driver.get(
+      "http://kanban-atpl-dev.s3-website.ap-south-1.amazonaws.com/app"
+    );
 
     const selectEmail = await driver.wait(
       until.elementLocated(
@@ -346,58 +347,60 @@ When("Add Text in Email Body", async function () {
 });
 
 When("Add File", async function () {
-
   // const uploadLabel = await driver.findElement(
   //   By.css("label[data-tooltip-id='upload-tooltip']")
   // );
-  
+
   // await driver.executeScript("document.activeElement.blur();");
-  
+
   // await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", uploadLabel);
-  
+
   // await driver.sleep(300);
-  
+
   // await driver.executeScript("arguments[0].click();", uploadLabel);
-  
-  
-  // await driver.sleep(600000)  
+
+  // await driver.sleep(600000)
   const downloadsFolder = path.join(os.homedir(), "Downloads");
-  const imagePath = path.join(downloadsFolder, "istockphoto-1798864003-2048x2048.jpg");
-  
+  const imagePath = path.join(
+    downloadsFolder,
+    "istockphoto-1798864003-2048x2048.jpg"
+  );
+
   if (!fs.existsSync(imagePath)) {
     console.error("❌ File does not exist:", imagePath);
     process.exit(1);
   }
-  
+
   const fileInput = await driver.wait(
     until.elementLocated(
       By.css("label[data-tooltip-id='upload-tooltip'] input[type='file']")
     ),
     10000
   );
-  
+
   console.log("Uploading file:", imagePath);
   await fileInput.sendKeys(imagePath);
-  
+
   // Force React to pick up the change
-  await driver.executeScript(`
+  await driver.executeScript(
+    `
     const input = arguments[0];
     const event = new Event('change', { bubbles: true });
     input.dispatchEvent(event);
-  `, fileInput);
-  
+  `,
+    fileInput
+  );
+
   // Optional: wait to see UI update
   await driver.sleep(3000);
-  
-  
-  
+
   // Verify uploaded file name (optional)
   const fileName = await driver.executeScript(
     "return arguments[0].files[0]?.name;",
     fileInput
   );
   console.log("✅ Uploaded file:", fileName);
-  
+
   // Preview wait (optional)
   await driver.sleep(3000);
 
@@ -406,17 +409,16 @@ When("Add File", async function () {
   //   10000
   // );
   // const fileInput = await driver.findElement(By.css("input[type='file']"));
-//   const fileInput = await driver.findElement(
-//     By.css(
-//       "label[for='upload-tooltip'] input[type='file'], label[data-tooltip-id='upload-tooltip'] input[type='file']"
-//     )
-//   );
+  //   const fileInput = await driver.findElement(
+  //     By.css(
+  //       "label[for='upload-tooltip'] input[type='file'], label[data-tooltip-id='upload-tooltip'] input[type='file']"
+  //     )
+  //   );
 
-//   const selectedPath = await driver.executeScript("return arguments[0].value;", fileInput);
-// console.log("Selected file path (from input.value):", selectedPath);
+  //   const selectedPath = await driver.executeScript("return arguments[0].value;", fileInput);
+  // console.log("Selected file path (from input.value):", selectedPath);
 
-
-//   await fileInput.sendKeys(imagePath);
+  //   await fileInput.sendKeys(imagePath);
   await driver.sleep(10000);
 });
 
