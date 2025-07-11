@@ -151,7 +151,10 @@ When("Add Client Name", async function () {
       // Close modal
       const closeButton = await driver.findElement(By.css(".btn-close"));
       await closeButton.click();
+      await driver.sleep(5000)
     } else {
+      await driver.sleep(5000)
+      
       // Scan QR button inside name row
       const clickQr = await nameCell.findElement(
         By.xpath(".//following::button[text()='Scan QR']")
