@@ -11,7 +11,7 @@ const path = require("path");
 const os = require("os");
 const chromedriver = require("chromedriver");
 let driver;
-const clientName = "testingkanban3";
+const clientName = "testingkanban";
 const isExistingClient = false;
 setDefaultTimeout(120 * 1000);
 Before(async function () {
@@ -110,8 +110,7 @@ When("Click on Sync Whats App", async function () {
 });
 
 When("Add Client Name", async function () {
-
-  // Fill client name input
+  const clientName = "testingkanban";
   const clientNameInput = await driver.wait(
     until.elementLocated(By.xpath("//input[@placeholder='Enter Client Name']")),
     10000
@@ -125,7 +124,6 @@ When("Add Client Name", async function () {
     10000
   );
   await saveButton.click();
-
   await driver.sleep(1000);
 
   let isMatch = false;
@@ -134,36 +132,39 @@ When("Add Client Name", async function () {
     const nameCell = await driver.wait(
       until.elementLocated(
         By.xpath(
-          "//table[contains(@class,'min-w-full')]//tbody//tr//td[contains(text(),'" +
-            clientName +
-            "')]"
+          `//table[contains(@class,'min-w-full')]//tbody//tr//td[contains(text(),'${clientName}')]`
         )
       ),
       5000
     );
+
     const nameText = await nameCell.getText();
     isMatch = nameText.trim() === clientName;
+
+    if (isMatch) {
+      // Remove toast
+      await driver.executeScript(`
+        const toast = document.querySelector(".Toastify__toast-container");
+        if (toast) toast.remove();
+      `);
+
+      // Close modal
+      const closeButton = await driver.findElement(By.css(".btn-close"));
+      await closeButton.click();
+    } else {
+      // Scan QR button inside name row
+      const clickQr = await nameCell.findElement(
+        By.xpath(".//following::button[text()='Scan QR']")
+      );
+      await clickQr.click();
+      await driver.sleep(30000);
+    }
   } catch (err) {
-    isMatch = false;
-  }
-
-  if(isMatch){
-await driver.executeScript(`
-    const toast = document.querySelector(".Toastify__toast-container");
-    if (toast) toast.remove();
-  `);
-  
-  const closeButton = await driver.findElement(By.css(".btn-close"));
-  await closeButton.click();
-        
-  }else {
-
-    console.log("fdfdfd")
-
-    const clickQr = await nameCell.findElement(By.xpath("//button[text()='Scan QR']"))
-    await clickQr.click()
-    await driver.sleep(30000)
-
+    console.log("Client not found in table. Showing alert.");
+    await driver.executeScript("alert('Client not found!')");
+    await driver.wait(until.alertIsPresent(), 5000);
+    const alert = await driver.switchTo().alert();
+    await alert.accept();
   }
 
   await driver.sleep(2000);
