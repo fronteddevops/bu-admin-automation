@@ -28,7 +28,6 @@ Before(async function () {
     .setChromeOptions(options)
     .build();
   await driver.manage().window().maximize();
-  console.log("Browser launched.");
 });
 
 // Teardown after each scenario

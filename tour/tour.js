@@ -838,7 +838,6 @@ const os = require("os");
     );
 
     const buttonText = await wDayButton.getText();
-    console.log("Button text is:", buttonText);
 
     // await driver.executeScript(
     //   "arguments[0].scrollIntoView({block: 'center'});",

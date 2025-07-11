@@ -14,9 +14,7 @@ let driver;
 setDefaultTimeout(120 * 1000);
 
 Before(async function () {
-  console.log("Launching browser...");
   driver = await new Builder().forBrowser("chrome").build();
-  console.log("Browser launched.");
   await driver.manage().window().maximize();
 });
 
@@ -1638,11 +1636,7 @@ When(
       10000
     );
 
-    console.log("titleInput:", titleInputdata);
-
     await driver.wait(until.elementIsVisible(titleInputdata), 5000);
-    console.log("titleInput:", titleInputdata);
-
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       titleInputdata
@@ -1777,9 +1771,7 @@ When(
     const closeButtonmodal = await driver.findElement(
       By.xpath('//button[@class="btn-close" and @aria-label="Close"]')
     );
-    console.log("closeButtonmodal", closeButtonmodal);
     await closeButtonmodal.click();
-
     const saveNxtButton = await driver.wait(
       until.elementLocated(By.css("button.save-and-next-button")),
       10000

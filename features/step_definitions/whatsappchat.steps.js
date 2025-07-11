@@ -13,9 +13,7 @@ const chromedriver = require("chromedriver");
 let driver;
 setDefaultTimeout(120 * 1000);
 Before(async function () {
-  console.log("Launching browser...");
   driver = await new Builder().forBrowser("chrome").build();
-  console.log("Browser launched.");
   await driver.manage().window().maximize();
 });
 

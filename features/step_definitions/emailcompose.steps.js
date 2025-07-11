@@ -14,9 +14,7 @@ const chromedriver = require("chromedriver");
 let driver;
 setDefaultTimeout(120 * 1000);
 Before(async function () {
-  console.log("Launching browser...");
   driver = await new Builder().forBrowser("chrome").build();
-  console.log("Browser launched.");
   await driver.manage().window().maximize();
 });
 
@@ -303,7 +301,7 @@ When("Select Template", async function () {
 
   // Select the first <option> (index 0)
   const firstOption = await selectElement.findElement(
-    By.css("option:nth-child(1)")
+    By.css("option:nth-child(2)")
   );
   await firstOption.click();
 
@@ -347,79 +345,49 @@ When("Add Text in Email Body", async function () {
 });
 
 When("Add File", async function () {
-  // const uploadLabel = await driver.findElement(
-  //   By.css("label[data-tooltip-id='upload-tooltip']")
-  // );
+  const attachLabel = await driver.wait(
+    until.elementLocated(By.css('label[data-tooltip-id="upload-tooltip"]')),
+    10000
+  );
+  const fileInput = await attachLabel.findElement(By.css('input[type="file"]'));
 
-  // await driver.executeScript("document.activeElement.blur();");
-
-  // await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", uploadLabel);
-
-  // await driver.sleep(300);
-
-  // await driver.executeScript("arguments[0].click();", uploadLabel);
-
-  // await driver.sleep(600000)
   const downloadsFolder = path.join(os.homedir(), "Downloads");
-  const imagePath = path.join(
+  const filePath = path.join(
     downloadsFolder,
     "istockphoto-1798864003-2048x2048.jpg"
   );
 
-  if (!fs.existsSync(imagePath)) {
-    console.error("❌ File does not exist:", imagePath);
-    process.exit(1);
+  await fileInput.sendKeys(filePath);
+
+  const fileCount = await driver.executeScript(
+    "return arguments[0].files.length;",
+    fileInput
+  );
+  console.log("Files selected:", fileCount);
+
+  await driver.sleep(2000);
+
+  const pageSource = await driver.getPageSource();
+  console.log(pageSource);
+
+  try {
+    await driver.wait(
+      until.elementLocated(By.css('[class*="file-preview"]')),
+      10000
+    );
+    console.log("Found a file preview element!");
+  } catch (e) {
+    console.log('No file preview element found with [class*="file-preview"]');
   }
 
-  const fileInput = await driver.wait(
-    until.elementLocated(
-      By.css("label[data-tooltip-id='upload-tooltip'] input[type='file']")
-    ),
-    10000
-  );
+  try {
+    await driver.wait(until.elementLocated(By.css("img")), 10000);
+    console.log("Found an <img> element!");
+  } catch (e) {
+    console.log("No <img> element found.");
+  }
 
-  console.log("Uploading file:", imagePath);
-  await fileInput.sendKeys(imagePath);
-
-  // Force React to pick up the change
-  await driver.executeScript(
-    `
-    const input = arguments[0];
-    const event = new Event('change', { bubbles: true });
-    input.dispatchEvent(event);
-  `,
-    fileInput
-  );
-
-  // Optional: wait to see UI update
-  await driver.sleep(3000);
-
-  // Verify uploaded file name (optional)
-  const fileName = await driver.executeScript(
-    "return arguments[0].files[0]?.name;",
-    fileInput
-  );
-  console.log("✅ Uploaded file:", fileName);
-
-  // Preview wait (optional)
-  await driver.sleep(3000);
-
-  // const fileInput = await driver.wait(
-  //   until.elementLocated(By.css("input[type='file']")),
-  //   10000
-  // );
-  // const fileInput = await driver.findElement(By.css("input[type='file']"));
-  //   const fileInput = await driver.findElement(
-  //     By.css(
-  //       "label[for='upload-tooltip'] input[type='file'], label[data-tooltip-id='upload-tooltip'] input[type='file']"
-  //     )
-  //   );
-
-  //   const selectedPath = await driver.executeScript("return arguments[0].value;", fileInput);
-  // console.log("Selected file path (from input.value):", selectedPath);
-
-  //   await fileInput.sendKeys(imagePath);
-  await driver.sleep(10000);
+  await driver.sleep(5000);
 });
 
 When("click on Send Email", async function () {

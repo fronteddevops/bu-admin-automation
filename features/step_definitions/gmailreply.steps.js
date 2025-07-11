@@ -13,9 +13,7 @@ const chromedriver = require("chromedriver");
 let driver;
 setDefaultTimeout(120 * 1000);
 Before(async function () {
-  console.log("Launching browser...");
   driver = await new Builder().forBrowser("chrome").build();
-  console.log("Browser launched.");
   await driver.manage().window().maximize();
 });
 
@@ -219,7 +217,6 @@ When("Click on First indexing Email on To Do", async function () {
     firstTask
   );
   await driver.sleep(300);
-
   await firstTask.click();
 });
 
@@ -269,7 +266,7 @@ When("Enter Reply Message", async function () {
 
 When("file Attache- Attache Pdf File", async function () {
     const downloadsFolder = path.join(os.homedir(), "Downloads");
-    const imagePath = path.join(downloadsFolder, "dummy.pdf");
+    const imagePath = path.join(downloadsFolder, "istockphoto-1798864003-2048x2048.jpg");
 
     const fileInput = await driver.wait(
       until.elementLocated(By.css("input[type='file']")),

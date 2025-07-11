@@ -241,12 +241,9 @@ const os = require("os");
       By.xpath("ancestor::div[contains(@class, 'mb-3')]")
     );
 
-    console.log("containercountry", containercountry);
 
     const selects = await containercountry.findElement(By.tagName("select"));
-    console.log("selects", selects);
     const optionscountry = await selects.findElements(By.tagName("option"));
-    console.log("optionscountry", optionscountry);
 
     for (const option of optionscountry) {
       const text = await option.getText();
@@ -1628,10 +1625,8 @@ const os = require("os");
       10000
     );
 
-    console.log("titleInput:", titleInputdata);
 
     await driver.wait(until.elementIsVisible(titleInputdata), 5000);
-    console.log("titleInput:", titleInputdata);
 
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
@@ -1723,11 +1718,7 @@ const os = require("os");
     );
 
     await priceInput.clear();
-
     await priceInput.sendKeys("25450");
-
-    console.log("new")
-
     const saveButtonses = await driver.wait(
       until.elementLocated(
         By.xpath(
@@ -1737,7 +1728,6 @@ const os = require("os");
       10000
     );
 
-    console.log("alert")
 
     await driver.wait(until.elementIsVisible(saveButtonses), 5000);
     await driver.executeScript(
@@ -1746,10 +1736,6 @@ const os = require("os");
     );
 
     await saveButtonses.click();
-
-
-    console.log("ddddddddddfeffffffffff")
-
     // Wait for alert to appear
 await driver.wait(until.alertIsPresent(), 5000);
 
@@ -1758,7 +1744,6 @@ const alert = await driver.switchTo().alert();
 
 // Optional: read alert text
 const alertText = await alert.getText();
-console.log("Alert says:", alertText);
 
 // Accept the alert (click "OK")
 await alert.accept();
@@ -1789,7 +1774,6 @@ await alert.accept();
       5000
     );
 
-    console.log("saveNextButtonfaqs",saveNextButtonfaqs)
     
     // Ensure it is visible and enabled
     await driver.wait(until.elementIsVisible(saveNextButtonfaqs), 5000);

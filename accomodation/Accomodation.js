@@ -241,12 +241,10 @@ const os = require("os");
       By.xpath("ancestor::div[contains(@class, 'mb-3')]")
     );
 
-    console.log("containercountry", containercountry);
 
     const selects = await containercountry.findElement(By.tagName("select"));
     console.log("selects", selects);
     const optionscountry = await selects.findElements(By.tagName("option"));
-    console.log("optionscountry", optionscountry);
 
     for (const option of optionscountry) {
       const text = await option.getText();
@@ -1628,10 +1626,8 @@ const os = require("os");
       10000
     );
 
-    console.log("titleInput:", titleInputdata);
 
     await driver.wait(until.elementIsVisible(titleInputdata), 5000);
-    console.log("titleInput:", titleInputdata);
 
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
@@ -1727,7 +1723,6 @@ const os = require("os");
 
     await priceInput.sendKeys("25450");
 
-    console.log("alertchecking............");
 
     // const saveButtonses = await driver.wait(
     //   until.elementLocated(

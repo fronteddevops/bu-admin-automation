@@ -9,9 +9,7 @@ let selectedGroup = "Admin Group4561";
 setDefaultTimeout(120 * 1000); 
 
 Before( async function () {
-  console.log("Launching browser...");
   driver = await new Builder().forBrowser('chrome').build();
-  console.log("Browser launched.");
   await driver.manage().window().maximize();
   
 });
@@ -39,7 +37,6 @@ Given('I am logged in as admin', { timeout: 180000 }, async function () {
   await driver.wait(until.elementIsEnabled(signInBtn), 5000);
   await signInBtn.click();
   await driver.sleep(2000);
-  console.log("Login step completed.");
 });
 
 When('I navigate to the Users section in Settings', async function () {
