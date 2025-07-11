@@ -291,19 +291,24 @@ When("Click on WhatsApp", async function () {
   await driver.sleep(1000);
 });
 
-When("chat and type text" , async function (){
-    const inputField = await driver.wait(
-        until.elementLocated(By.css("input.msger-input")),
-        10000
-      );
-      
-      // Wait until it's visible
-      await driver.wait(until.elementIsVisible(inputField), 5000);
-      
-      // Then click & type
-      await inputField.click();
-      await inputField.sendKeys("hellow sandeep sir");
-      
-      await driver.sleep(30000)
+When("chat and type text", async function () {
+  const chatInput = await driver.wait(
+    until.elementIsVisible(
+      driver.findElement(
+        By.xpath("//input[@placeholder='Enter your message...']")
+      )
+    ),
+    10000
+  );
 
-})
+  await chatInput.sendKeys("Hello from Selenium!");
+  await driver.sleep(5000);
+
+  // Click on Send button
+  const sendBtn = await driver.wait(
+    until.elementLocated(By.xpath("//button[@type='submit']")),
+    5000
+  );
+  await sendBtn.click();
+  await driver.sleep(30000);
+});
