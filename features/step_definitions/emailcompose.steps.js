@@ -344,51 +344,162 @@ When("Add Text in Email Body", async function () {
   await driver.sleep(2000);
 });
 
+// When("Add File", async function () {
+//   const attachLabel = await driver.wait(
+//     until.elementLocated(By.css('label[data-tooltip-id="upload-tooltip"]')),
+//     10000
+//   );
+//   const fileInput = await attachLabel.findElement(By.css('input[type="file"]'));
+
+//   const downloadsFolder = path.join(os.homedir(), "Downloads");
+//   const filePath = path.join(
+//     downloadsFolder,
+//     "istockphoto-1798864003-2048x2048.jpg"
+//   );
+
+//   await fileInput.sendKeys(filePath);
+
+//   const fileCount = await driver.executeScript(
+//     "return arguments[0].files.length;",
+//     fileInput
+//   );
+//   console.log("Files selected:", fileCount);
+
+//   await driver.sleep(2000);
+
+//   const pageSource = await driver.getPageSource();
+//   console.log(pageSource);
+
+//   try {
+//     await driver.wait(
+//       until.elementLocated(By.css('[class*="file-preview"]')),
+//       10000
+//     );
+//     console.log("Found a file preview element!");
+//   } catch (e) {
+//     console.log('No file preview element found with [class*="file-preview"]');
+//   }
+
+//   try {
+//     await driver.wait(until.elementLocated(By.css("img")), 10000);
+//     console.log("Found an <img> element!");
+//   } catch (e) {
+//     console.log("No <img> element found.");
+//   }
+
+//   await driver.sleep(5000);
+// });
+
 When("Add File", async function () {
-  const attachLabel = await driver.wait(
-    until.elementLocated(By.css('label[data-tooltip-id="upload-tooltip"]')),
+  const downloadsFolder = path.join(os.homedir(), "Downloads");
+  const filePath = path.join(downloadsFolder, "istockphoto-1798864003-2048x2048.jpg");
+
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`❌ File not found at: ${filePath}`);
+  }
+
+  const modal = await driver.wait(
+    until.elementLocated(By.xpath("//div[contains(@class,'modal-header')]//div[text()='Compose Email']/ancestor::div[contains(@class,'modal')]")),
     10000
   );
-  const fileInput = await attachLabel.findElement(By.css('input[type="file"]'));
+  await driver.wait(until.elementIsVisible(modal), 5000);
+  console.log("✅ Compose Email modal is open");
 
-  const downloadsFolder = path.join(os.homedir(), "Downloads");
-  const filePath = path.join(
-    downloadsFolder,
-    "istockphoto-1798864003-2048x2048.jpg"
-  );
+  const fileInput = await modal.findElement(By.css('input[type="file"]'));
 
   await fileInput.sendKeys(filePath);
 
-  const fileCount = await driver.executeScript(
-    "return arguments[0].files.length;",
+  await driver.executeScript(`
+    const input = arguments[0];
+    const event = new Event('change', { bubbles: true });
+    input.dispatchEvent(event);
+  `, fileInput);
+
+  const fileName = await driver.executeScript(
+    "return arguments[0].files[0]?.name;",
     fileInput
   );
-  console.log("Files selected:", fileCount);
+  console.log("📂 File selected in input:", fileName);
 
-  await driver.sleep(2000);
-
-  const pageSource = await driver.getPageSource();
-  console.log(pageSource);
-
+  let previewImg;
   try {
-    await driver.wait(
-      until.elementLocated(By.css('[class*="file-preview"]')),
-      10000
-    );
-    console.log("Found a file preview element!");
+    // previewImg = await modal.findElement(By.css('img[alt="Preview 0"]'));
+    previewImg = await modal.findElement(By.css('img.object-cover'));
+    const imgSrc = await previewImg.getAttribute("src");
+    console.log("🖼️ Preview image src:", imgSrc);
+
+    if (imgSrc.startsWith("blob:")) {
+      console.log("✅ Image preview loaded in modal!");
+    } else {
+      console.warn("⚠️ Image preview src is not a blob.");
+    }
   } catch (e) {
-    console.log('No file preview element found with [class*="file-preview"]');
+    console.error("❌ Image preview not found in modal.");
   }
 
-  try {
-    await driver.wait(until.elementLocated(By.css("img")), 10000);
-    console.log("Found an <img> element!");
-  } catch (e) {
-    console.log("No <img> element found.");
-  }
+  const screenshot = await driver.takeScreenshot();
+  fs.writeFileSync("compose-email-preview.png", screenshot, "base64");
+  console.log("📸 Screenshot saved as compose-email-preview.png");
 
-  await driver.sleep(5000);
+  await driver.sleep(20000);
 });
+
+// When("Add File", async function () {
+//   const downloadsFolder = path.join(os.homedir(), "Downloads");
+//   const filePath = path.join(downloadsFolder, "istockphoto-1798864003-2048x2048.jpg");
+
+//   if (!fs.existsSync(filePath)) {
+//     throw new Error(`❌ File not found: ${filePath}`);
+//   }
+
+//   // 1. Wait for Compose Email modal
+//   const modal = await driver.wait(
+//     until.elementLocated(By.xpath("//div[contains(@class,'modal-header')]//div[text()='Compose Email']/ancestor::div[contains(@class,'modal')]")),
+//     10000
+//   );
+//   await driver.wait(until.elementIsVisible(modal), 5000);
+//   console.log("✅ Compose Email modal is visible");
+
+//   // 2. Upload file
+//   const fileInput = await modal.findElement(By.css('input[type="file"]'));
+//   await fileInput.sendKeys(filePath);
+
+//   // 3. Trigger React change
+//   await driver.executeScript(`
+//     const input = arguments[0];
+//     const event = new Event('change', { bubbles: true });
+//     input.dispatchEvent(event);
+//   `, fileInput);
+
+//   // 4. Confirm file selected
+//   const fileName = await driver.executeScript(
+//     "return arguments[0].files[0]?.name;",
+//     fileInput
+//   );
+//   console.log("📂 Uploaded file:", fileName);
+
+//   // ✅ 5. Wait for image preview in .email-file-preview
+//   const previewImg = await driver.wait(
+//     until.elementLocated(By.css(".email-file-preview img")),
+//     10000
+//   );
+
+//   const imgSrc = await previewImg.getAttribute("src");
+//   console.log("🖼️ Preview image src:", imgSrc);
+
+//   if (imgSrc.startsWith("blob:")) {
+//     console.log("✅ Image preview is a blob URL.");
+//   } else {
+//     console.warn("⚠️ Image preview is NOT a blob.");
+//   }
+
+//   // 6. Screenshot
+//   const screenshot = await driver.takeScreenshot();
+//   fs.writeFileSync("compose-email-preview.png", screenshot, "base64");
+//   console.log("📸 Screenshot saved: compose-email-preview.png");
+
+//   await driver.sleep(2000);
+// });
 
 When("click on Send Email", async function () {
   const sendButton = await driver.wait(
@@ -406,5 +517,5 @@ When("click on Send Email", async function () {
   );
   await driver.sleep(300);
   await sendButton.click();
-  await driver.sleep(10000);
+  await driver.sleep(100000);
 });
