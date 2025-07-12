@@ -5,7 +5,7 @@ const os = require('os');
 const chromedriver = require('chromedriver');
 let driver;
 let selectedGroup = "Admin Group4561";
-
+const emailToFind = "johnx4@example.com";
 setDefaultTimeout(120 * 1000); 
 
 Before( async function () {
@@ -21,7 +21,7 @@ After(async function () {
 });
 
 Given('I am logged in as admin', { timeout: 180000 }, async function () {
-  await driver.get('http://192.168.29.67:5173/kanban');
+  await driver.get('http://localhost:5173');
   const emailInput = await driver.wait(until.elementLocated(By.css("input[name='email'][placeholder='Email']")), 500);
   await driver.wait(until.elementIsVisible(emailInput), 10000);
   await emailInput.click();
@@ -67,7 +67,6 @@ When('I create a new group {string} with permissions', async function (groupName
   await driver.sleep(300);
   await groupInput.clear();
   await groupInput.sendKeys(selectedGroup);
-  // Permissions selection (simplified for brevity)
   async function selectPermission(sectionText, optionText) {
     const section = await driver.wait(until.elementLocated(By.xpath(`//p[normalize-space()='${sectionText}']/ancestor::div[contains(@class, 'd-flex')]`)), 10000);
     const radioLabel = await section.findElement(By.xpath(`.//label[.//span[normalize-space()='${optionText}']]`));

@@ -517,5 +517,5 @@ When("click on Send Email", async function () {
   );
   await driver.sleep(300);
   await sendButton.click();
-  await driver.sleep(100000);
+  await driver.sleep(10000);
 });
