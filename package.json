@@ -22,7 +22,9 @@
     "test:addwhatsappnumber": "cucumber-js features/addwhatsappnumber.feature --require features/step_definitions/addwhatsappnumber.steps.js --format json:reports/addwhatsappnumber_report.json",
     "report:addwhatsappnumber": "node features/step_definitions/addwhatsappnumberReport.js",
     "test:usermanagement": "cucumber-js features/usermanagement.feature --require features/step_definitions/usermanagement.steps.js --format json:reports/usermanagement_report.json",
-    "report:usermanagement": "node features/step_definitions/usermanagementReport.js"
+    "report:usermanagement": "node features/step_definitions/usermanagementReport.js",
+    "test:internalnotes": "cucumber-js features/internalnotes.feature --require features/step_definitions/internalnotes.steps.js --format json:reports/internalnotes_report.json",
+    "report:internalnotes": "node features/step_definitions/internalnotesReport.js"
   },
   "keywords": [],
   "author": "",

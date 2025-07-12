@@ -11,6 +11,10 @@ const path = require("path");
 const fs = require("fs");
 const os = require("os");
 const chromedriver = require("chromedriver");
+const imageDir = path.join(__dirname, "image");
+if (!fs.existsSync(imageDir)) {
+  fs.mkdirSync(imageDir);
+}
 let driver;
 setDefaultTimeout(120 * 1000);
 Before(async function () {
@@ -438,9 +442,9 @@ When("Add File", async function () {
   }
 
   const screenshot = await driver.takeScreenshot();
-  fs.writeFileSync("compose-email-preview.png", screenshot, "base64");
+  const imagePath = path.join(imageDir, "compose-email-preview.png");
+  fs.writeFileSync(imagePath, screenshot, "base64");
   console.log("📸 Screenshot saved as compose-email-preview.png");
-
   await driver.sleep(20000);
 });
 
