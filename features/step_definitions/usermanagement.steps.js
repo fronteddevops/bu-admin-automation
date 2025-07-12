@@ -114,7 +114,6 @@ When("Click on Add Button", async function () {
 });
 
 When("Select first Board under New Assignment", async function () {
-  // 1. Find the "New Assignment" label
   const newAssignmentLabel = await driver.findElement(
     By.xpath("//div[contains(text(),'New Assignment')]")
   );
@@ -148,21 +147,25 @@ When("Select Column under New Assignment", async function () {
   );
 
   const columnContainer = await newAssignmentLabel.findElement(
-    By.xpath("following::div[contains(@class,'form-item') and .//div[text()='Column']][1]")
+    By.xpath(
+      "following::div[contains(@class,'form-item') and .//div[text()='Column']][1]"
+    )
   );
 
-  const dropdown = await columnContainer.findElement(By.css(".dropdown-container"));
+  const dropdown = await columnContainer.findElement(
+    By.css(".dropdown-container")
+  );
   await dropdown.click();
 
   await driver.sleep(1000);
 
   const options = await driver.findElements(
-    By.xpath("//div[contains(@class,'select-item')]")
+    By.css(".rmsc .dropdown-content .select-item")
   );
 
-  for (const option of options) {
-    const txt = await option.getText();
-    console.log("Found option:", txt);
+  for (let i = 0; i < options.length; i++) {
+    const text = await options[i].getText();
+    console.log(`Option ${i}: ${text}`);
   }
 
   if (options.length <= 1) {
@@ -175,7 +178,6 @@ When("Select Column under New Assignment", async function () {
     await driver.sleep(300);
   }
 });
-
 
 When("Click on Save Button", async function () {
   const saveButton = await driver.wait(
