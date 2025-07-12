@@ -24,7 +24,9 @@
     "test:usermanagement": "cucumber-js features/usermanagement.feature --require features/step_definitions/usermanagement.steps.js --format json:reports/usermanagement_report.json",
     "report:usermanagement": "node features/step_definitions/usermanagementReport.js",
     "test:internalnotes": "cucumber-js features/internalnotes.feature --require features/step_definitions/internalnotes.steps.js --format json:reports/internalnotes_report.json",
-    "report:internalnotes": "node features/step_definitions/internalnotesReport.js"
+    "report:internalnotes": "node features/step_definitions/internalnotesReport.js",
+    "test:tasksassign": "cucumber-js features/tasksassign.feature --require features/step_definitions/tasksassign.steps.js --format json:reports/tasksassign_report.json",
+    "report:tasksassign": "node features/step_definitions/tasksassignReport.js"
   },
   "keywords": [],
   "author": "",
