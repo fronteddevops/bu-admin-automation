@@ -157,7 +157,6 @@ When("Delete Template", async function () {
   );
   await deleteButton.click();
   const logs = await driver.manage().logs().get('browser');
-  console.log("logsssss",logs)
   await driver.sleep(5000);
 });
 

@@ -165,7 +165,7 @@ When("Select Column under New Assignment", async function () {
 
   for (let i = 0; i < options.length; i++) {
     const text = await options[i].getText();
-    console.log(`Option ${i}: ${text}`);
+    
   }
 
   if (options.length <= 1) {

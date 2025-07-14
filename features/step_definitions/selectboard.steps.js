@@ -80,5 +80,5 @@ When("Select Board", async function () {
     dropdownInput
   );
   await driver.executeScript("arguments[0].click();", dropdownInput);
-  await driver.sleep(1000);
+  await driver.sleep(10000);
 });

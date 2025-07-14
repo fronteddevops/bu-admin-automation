@@ -159,7 +159,6 @@ When("Change Status", async function(){
       
       // 3. Click the status toggle
       await statusToggle.click();
-      console.log("Status toggle clicked for 'Your Template Name'.");
       await driver.sleep(10000)
 
 })
@@ -175,7 +174,6 @@ When("Delete Template", async function () {
   );
   await deleteButton.click();
   const logs = await driver.manage().logs().get('browser');
-  console.log("logsssss",logs)
   await driver.sleep(5000);
 });
 
