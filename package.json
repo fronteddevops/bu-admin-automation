@@ -26,7 +26,9 @@
     "test:internalnotes": "cucumber-js features/internalnotes.feature --require features/step_definitions/internalnotes.steps.js --format json:reports/internalnotes_report.json",
     "report:internalnotes": "node features/step_definitions/internalnotesReport.js",
     "test:tasksassign": "cucumber-js features/tasksassign.feature --require features/step_definitions/tasksassign.steps.js --format json:reports/tasksassign_report.json",
-    "report:tasksassign": "node features/step_definitions/tasksassignReport.js"
+    "report:tasksassign": "node features/step_definitions/tasksassignReport.js",
+    "test:addtemplate": "cucumber-js features/addtemplate.feature --require features/step_definitions/addtemplate.steps.js --format json:reports/addtemplate_report.json",
+    "report:addtemplate": "node features/step_definitions/addtemplateReport.js"
   },
   "keywords": [],
   "author": "",

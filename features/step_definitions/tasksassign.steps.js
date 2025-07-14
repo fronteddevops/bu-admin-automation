@@ -260,10 +260,7 @@ When("Select My Day plan Tomorrow", async function () {
     10000
   );
   await tomorrowBtn.click();
-  
-  
-  
-
+    
   //click on tomorrow
   const tomorrowOption = await driver.wait(
     until.elementLocated(
@@ -272,11 +269,8 @@ When("Select My Day plan Tomorrow", async function () {
     10000
   );
   await tomorrowOption.click();
-
   // Click on Today
-
-  
-});
+  });
 
 // When("Click on Today", async function(){
 //   const timeButton = await driver.wait(
