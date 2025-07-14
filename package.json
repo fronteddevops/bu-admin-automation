@@ -28,7 +28,9 @@
     "test:tasksassign": "cucumber-js features/tasksassign.feature --require features/step_definitions/tasksassign.steps.js --format json:reports/tasksassign_report.json",
     "report:tasksassign": "node features/step_definitions/tasksassignReport.js",
     "test:addtemplate": "cucumber-js features/addtemplate.feature --require features/step_definitions/addtemplate.steps.js --format json:reports/addtemplate_report.json",
-    "report:addtemplate": "node features/step_definitions/addtemplateReport.js"
+    "report:addtemplate": "node features/step_definitions/addtemplateReport.js",
+    "test:addautomation": "cucumber-js features/addautomation.feature --require features/step_definitions/addautomation.steps.js --format json:reports/addautomation_report.json",
+    "report:addautomation": "node features/step_definitions/addautomationReport.js"
   },
   "keywords": [],
   "author": "",
