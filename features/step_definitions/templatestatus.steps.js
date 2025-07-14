@@ -27,7 +27,7 @@ After(async function () {
   }
 });
 
-Given("I am logged for Add Template", { timeout: 180000 }, async function () {
+Given("I am logged for Change Template Status", { timeout: 180000 }, async function () {
   await driver.get("http://localhost:3000");
 
   const selectEmail = await driver.wait(
@@ -145,6 +145,24 @@ When("Click on Save Changes", async function () {
   await saveButton.click();
   await driver.sleep(10000);
 });
+
+When("Change Status", async function(){
+    const targetRow = await driver.wait(
+        until.elementLocated(By.xpath("//table//tr[td[text()='Your Template Name']]")),
+        10000
+      );
+      
+      // 2. Within that row, find the checkbox inside the switch (status button)
+      const statusToggle = await targetRow.findElement(
+        By.css("input.form-check-input[type='checkbox']")
+      );
+      
+      // 3. Click the status toggle
+      await statusToggle.click();
+      console.log("Status toggle clicked for 'Your Template Name'.");
+      await driver.sleep(10000)
+
+})
 
 When("Delete Template", async function () {
   const deleteButton = await driver.wait(

@@ -32,7 +32,10 @@
     "test:addautomation": "cucumber-js features/addautomation.feature --require features/step_definitions/addautomation.steps.js --format json:reports/addautomation_report.json",
     "report:addautomation": "node features/step_definitions/addautomationReport.js",
     "test:addboard": "cucumber-js features/addboard.feature --require features/step_definitions/addboard.steps.js --format json:reports/addboard_report.json",
-    "report:addboard": "node features/step_definitions/addboardReport.js"
+    "report:addboard": "node features/step_definitions/addboardReport.js",
+    "test:templatestatus": "cucumber-js features/templatestatus.feature --require features/step_definitions/templatestatus.steps.js --format json:reports/templatestatus_report.json",
+    "report:templatestatus": "node features/step_definitions/templatestatusReport.js"
+  
   },
   "keywords": [],
   "author": "",

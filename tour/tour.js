@@ -92,7 +92,7 @@ const os = require("os");
     // Clear and enter the code
     await experienceCodeInput.clear();
     await experienceCodeInput.sendKeys("exp-789");
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
     const countrySelect = await driver.findElement(
       By.xpath(
@@ -108,7 +108,7 @@ const os = require("os");
     await countrySelect.click();
     const options = await countrySelect.findElements(By.tagName("option"));
     await options[2].click();
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
     // choose a state
     const stateContainer = await driver.findElement(
@@ -126,7 +126,7 @@ const os = require("os");
 
     const stateOptions = await stateSelect.findElements(By.tagName("option"));
     await stateOptions[1].click();
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
     const cityContainer = await driver.findElement(
       By.xpath(
@@ -364,7 +364,7 @@ const os = require("os");
     await inputamenities.sendKeys(Key.ARROW_DOWN);
     await driver.sleep(1000);
     await inputamenities.sendKeys(Key.ENTER);
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
     // eneter to click on save and next
 
@@ -970,7 +970,7 @@ const os = require("os");
     await input.sendKeys(Key.ARROW_DOWN, Key.ENTER);
     await driver.sleep(200);
     await input.sendKeys(Key.ENTER);
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
     // click on save and next button
     const saveAndNextButton = await driver.wait(
@@ -1681,21 +1681,19 @@ const os = require("os");
     await driver.sleep(1000);
 
     // Click on Age Range
-   // Locate all checkboxes inside the Age ranges section
-const checkboxes = await driver.wait(
-  until.elementsLocated(By.css("div.mb-0.w-100 input[type='checkbox']")),
-  10000
-);
+    // Locate all checkboxes inside the Age ranges section
+    const checkboxes = await driver.wait(
+      until.elementsLocated(By.css("div.mb-0.w-100 input[type='checkbox']")),
+      10000
+    );
 
-// Scroll into view and click the first checkbox
-await driver.executeScript(
-  "arguments[0].scrollIntoView({block: 'center'});",
-  checkboxes[0]
-);
-await driver.sleep(300);
-await checkboxes[0].click();
-
-    
+    // Scroll into view and click the first checkbox
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      checkboxes[0]
+    );
+    await driver.sleep(300);
+    await checkboxes[0].click();
 
     // click on save button
     const saveButtons = await driver.wait(
@@ -1714,27 +1712,29 @@ await checkboxes[0].click();
     );
     await driver.sleep(300);
     await driver.executeScript("arguments[0].click();", saveButtons);
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
-    // click save and next button 
+    // click save and next button
     const saveAndNextButtonpricing = await driver.wait(
       until.elementLocated(
-        By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
       ),
       10000
     );
-    
+
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       saveAndNextButtonpricing
     );
     await driver.sleep(300);
-    
-    await saveAndNextButtonpricing.click();
-    await driver.sleep(1000)
 
-    // Extra 
-    // click on Add Extra Button 
+    await saveAndNextButtonpricing.click();
+    await driver.sleep(1000);
+
+    // Extra
+    // click on Add Extra Button
 
     const addExtraButton = await driver.wait(
       until.elementLocated(
@@ -1742,32 +1742,33 @@ await checkboxes[0].click();
       ),
       10000
     );
-    
+
     // Scroll into view
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       addExtraButton
     );
     await driver.sleep(300);
-    
+
     // Click the button
     await addExtraButton.click();
-    
 
-    // Enter Title 
+    // Enter Title
     const titleInputextra = await driver.wait(
       until.elementLocated(
-        By.xpath("//label[normalize-space(text())='Title']/following-sibling::input")
+        By.xpath(
+          "//label[normalize-space(text())='Title']/following-sibling::input"
+        )
       ),
       10000
     );
-    
+
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       titleInputextra
     );
     await driver.sleep(300);
-    
+
     // Enter title
     await titleInputextra.sendKeys("Title for Testing");
 
@@ -1775,12 +1776,17 @@ await checkboxes[0].click();
 
     const firstRadio = await driver.wait(
       until.elementLocated(
-        By.xpath("//label[normalize-space(text())='Max units per boxing']/following-sibling::div//input[@type='radio'][1]")
+        By.xpath(
+          "//label[normalize-space(text())='Max units per boxing']/following-sibling::div//input[@type='radio'][1]"
+        )
       ),
       10000
     );
-    
-    await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", firstRadio);
+
+    await driver.executeScript(
+      "arguments[0].scrollIntoView({block: 'center'});",
+      firstRadio
+    );
     await driver.sleep(300);
     await firstRadio.click();
 
@@ -1788,115 +1794,123 @@ await checkboxes[0].click();
 
     const descriptionTextarea = await driver.wait(
       until.elementLocated(
-        By.xpath("//label[normalize-space(text())='Description']/following-sibling::textarea")
+        By.xpath(
+          "//label[normalize-space(text())='Description']/following-sibling::textarea"
+        )
       ),
       10000
     );
-    
+
     // Scroll into view
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       descriptionTextarea
     );
     await driver.sleep(300);
-    
+
     // Enter your description
     await descriptionTextarea.sendKeys("This is the description text.");
-    await driver.sleep(500)
+    await driver.sleep(500);
 
     // Enter Commission Input
     const commissionInput = await driver.wait(
       until.elementLocated(By.id("commissionGroup")),
       10000
     );
-    
+
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       commissionInput
     );
     await driver.sleep(300);
-    
-    await commissionInput.clear();
-    
-    await commissionInput.sendKeys("Your Commission Group Name");
-    await driver.sleep(500)
 
-    // click on save button 
+    await commissionInput.clear();
+
+    await commissionInput.sendKeys("Your Commission Group Name");
+    await driver.sleep(500);
+
+    // click on save button
     const saveButtonextra = await driver.wait(
       until.elementLocated(
         By.xpath("//button[normalize-space(text())='Save']")
       ),
       10000
     );
-    
+
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       saveButtonextra
     );
     await driver.sleep(300);
-    
-    await saveButtonextra.click();
-    await driver.sleep(1000)
 
-    // Click on Save and Next 
+    await saveButtonextra.click();
+    await driver.sleep(1000);
+
+    // Click on Save and Next
 
     const saveNextButton = await driver.wait(
       until.elementLocated(
-        By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
       ),
       10000
     );
-    
+
     // Scroll into view if needed
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       saveNextButton
     );
     await driver.sleep(300);
-    
+
     // Click the button
     await saveNextButton.click();
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
-    // Task & Resources 
+    // Task & Resources
     // Click on Add Task
 
     const addTasksButton = await driver.wait(
       until.elementLocated(
-        By.xpath("//button[@type='button' and contains(@class, 'primary-btn') and normalize-space(text())='Add Tasks']")
+        By.xpath(
+          "//button[@type='button' and contains(@class, 'primary-btn') and normalize-space(text())='Add Tasks']"
+        )
       ),
       10000
     );
-    
+
     // Scroll into view if needed
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       addTasksButton
     );
     await driver.sleep(300);
-    
+
     // Click the button
     await addTasksButton.click();
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
-    // Enter Task name 
+    // Enter Task name
 
     const taskInput = await driver.wait(
       until.elementLocated(
-        By.xpath("//label[normalize-space(text())='Task Title']/following-sibling::input")
+        By.xpath(
+          "//label[normalize-space(text())='Task Title']/following-sibling::input"
+        )
       ),
       10000
     );
-    
+
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       taskInput
     );
     await driver.sleep(300);
-    
+
     await taskInput.clear();
     await taskInput.sendKeys("My Sample Task Name");
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
     // Ener Desc
 
@@ -1904,59 +1918,61 @@ await checkboxes[0].click();
       until.elementLocated(By.id("description")),
       10000
     );
-    
+
     // Scroll into view
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       descriptionTextareatask
     );
     await driver.sleep(300);
-    
+
     // Clear and enter description
     await descriptionTextareatask.clear();
-    await descriptionTextareatask.sendKeys("This is a sample task description.");
-    await driver.sleep(1000)
+    await descriptionTextareatask.sendKeys(
+      "This is a sample task description."
+    );
+    await driver.sleep(1000);
 
-    // Enter Time 
+    // Enter Time
 
     const startTimeInputTask = await driver.wait(
       until.elementLocated(By.id("start-time")),
       10000
     );
-    
+
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       startTimeInputTask
     );
     await driver.sleep(300);
-    
+
     await startTimeInputTask.clear();
     await startTimeInputTask.sendKeys("04:25");
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
-    // Click on Save Button 
+    // Click on Save Button
 
     const saveButtonTask = await driver.wait(
       until.elementLocated(
-        By.xpath("//button[contains(@class, 'modal-success-button') and normalize-space(text())='Save']")
+        By.xpath(
+          "//button[contains(@class, 'modal-success-button') and normalize-space(text())='Save']"
+        )
       ),
       10000
     );
-    
+
     // Scroll into view
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       saveButtonTask
     );
     await driver.sleep(300);
-    
+
     // Click the button
     await saveButtonTask.click();
-    await driver.sleep(1000)
+    await driver.sleep(1000);
 
-    
-
-    // Select Resources 
+    // Select Resources
 
     const labelResources = await driver.wait(
       until.elementLocated(
@@ -1964,16 +1980,18 @@ await checkboxes[0].click();
       ),
       10000
     );
-    
+
     // Locate the dropdown container using the label's parent context
     const dropdownContainerres = await labelResources.findElement(
-      By.xpath("./following-sibling::div//div[contains(@class, 'css-b62m3t-container')]")
+      By.xpath(
+        "./following-sibling::div//div[contains(@class, 'css-b62m3t-container')]"
+      )
     );
-    
+
     const controlres = await dropdownContainerres.findElement(
       By.css(".css-13cymwt-control")
     );
-    
+
     // Scroll into view and click to open dropdown
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
@@ -1982,37 +2000,37 @@ await checkboxes[0].click();
     await driver.sleep(300);
     await driver.executeScript("arguments[0].click();", controlres);
     await driver.sleep(1000);
-    
+
     // Find the input element inside the React Select component
     const inputres = await dropdownContainerres.findElement(
       By.css("input[id^='react-select'][id$='-input']")
     );
-    
+
     // Send keys to select the first option
     await inputres.sendKeys(Key.ARROW_DOWN);
     await driver.sleep(300);
     await inputres.sendKeys(Key.ENTER);
     await driver.sleep(2000);
 
-
-    // Click on Save & Next 
+    // Click on Save & Next
 
     const saveAndNextButtonTask = await driver.wait(
       until.elementLocated(
-        By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
       ),
       10000
     );
-    
+
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       saveAndNextButtonTask
     );
     await driver.sleep(300);
-    
+
     await saveAndNextButtonTask.click();
-    await driver.sleep(1000)
-    
+    await driver.sleep(1000);
 
     // check on faq
     // const accordionToggle = await driver.wait(
@@ -2021,7 +2039,7 @@ await checkboxes[0].click();
     //   ),
     //   10000
     // );
-    
+
     // await driver.executeScript(
     //   "arguments[0].scrollIntoView({block: 'center'});",
     //   accordionToggle
@@ -2032,36 +2050,19 @@ await checkboxes[0].click();
     // click on save and next Button
     const saveAndNextButtonfaq = await driver.wait(
       until.elementLocated(
-        By.xpath("//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']")
+        By.xpath(
+          "//button[@type='submit' and contains(@class, 'save-and-next-button') and normalize-space(text())='Save and Next']"
+        )
       ),
       10000
     );
-    
+
     await driver.executeScript(
       "arguments[0].scrollIntoView({block: 'center'});",
       saveAndNextButtonfaq
     );
     await driver.sleep(300);
-    
     await saveAndNextButtonfaq.click();
-    
-     
-    
-    
-    
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   } finally {
   }
 })();
