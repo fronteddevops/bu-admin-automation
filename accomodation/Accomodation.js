@@ -461,19 +461,16 @@ const os = require("os");
       10000
     );
 
-    // Step 2: Find the parent container with class "mb-3"
     const containerpolicy = await policyLabel.findElement(
       By.xpath("ancestor::div[contains(@class, 'mb-3')]")
     );
 
-    // Step 3: Find and click the react-select control box
     const dropdownControlpolicy = await containerpolicy.findElement(
       By.css(".css-13cymwt-control")
     );
     await dropdownControlpolicy.click();
 
     await driver.sleep(1000);
-    // Step 4: Wait for dropdown input and focus
     const inputpolicy = await driver.wait(
       until.elementLocated(By.css("input[id^='react-select'][id$='-input']")),
       1000
@@ -495,11 +492,9 @@ const os = require("os");
       5000
     );
 
-    // Step 2: Find the input associated with the label (assuming same parent <div>)
     const parentDiv = await childLabel.findElement(By.xpath(".."));
     const childInput = await parentDiv.findElement(By.css("input"));
 
-    // Step 3: Click the input and type value
     await childInput.click();
     await childInput.clear();
     await childInput.sendKeys("2");
@@ -513,11 +508,9 @@ const os = require("os");
       5000
     );
 
-    // Step 2: Find the input associated with the label (assuming same parent <div>)
     const smparentDiv = await smokingLabel.findElement(By.xpath(".."));
     const smchildInput = await smparentDiv.findElement(By.css("input"));
 
-    // Step 3: Click the input and type value
     await smchildInput.click();
     await smchildInput.clear();
     await smchildInput.sendKeys("No");
