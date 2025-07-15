@@ -4,7 +4,7 @@ const path = require('path');
 const os = require('os');
 const chromedriver = require('chromedriver');
 let driver;
-let selectedGroup = "Admin Group4561";
+let selectedGroup = "Admin Group22";
 const emailToFind = "johnx4@example.com";
 setDefaultTimeout(120 * 1000); 
 
@@ -21,7 +21,7 @@ After(async function () {
 });
 
 Given('I am logged in as admin', { timeout: 180000 }, async function () {
-  await driver.get('http://localhost:5173');
+  await driver.get('http://localhost:5173/');
   const emailInput = await driver.wait(until.elementLocated(By.css("input[name='email'][placeholder='Email']")), 500);
   await driver.wait(until.elementIsVisible(emailInput), 10000);
   await emailInput.click();
@@ -151,11 +151,17 @@ When('I add a new user {string} with email {string} and password {string} to the
   const groupCombobox = await groupLabels.findElement(By.xpath("./following-sibling::div//div[@role='combobox']"));
   await driver.sleep(300);
   await groupCombobox.click();
-  await driver.sleep(1000);
-  const adminGroupOption = await driver.wait(until.elementLocated(By.xpath(`//span[text()='${selectedGroup}']`)), 10000);
-  await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", adminGroupOption);
-  await driver.sleep(300);
-  await adminGroupOption.click();
+  const listbox = await driver.wait(
+    until.elementLocated(By.css('ul[role="listbox"]')),
+    10000
+  );
+  
+  const option = await listbox.findElement(
+    By.xpath(".//li[normalize-space(text())='Admin Group22']")
+  );
+  
+  await driver.executeScript("arguments[0].scrollIntoView(true);", option);
+  await option.click();
   // Enter Name
   const nameLabel = await driver.wait(until.elementLocated(By.xpath("//label[normalize-space()='Name']")), 10000);
   const nameInput = await nameLabel.findElement(By.xpath("./following-sibling::input"));
