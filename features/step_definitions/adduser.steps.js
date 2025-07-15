@@ -4,7 +4,7 @@ const path = require('path');
 const os = require('os');
 const chromedriver = require('chromedriver');
 let driver;
-let selectedGroup = "Admin Group22";
+let selectedGroup = "Admin Group11";
 const emailToFind = "johnx4@example.com";
 setDefaultTimeout(120 * 1000); 
 
@@ -157,7 +157,7 @@ When('I add a new user {string} with email {string} and password {string} to the
   );
   
   const option = await listbox.findElement(
-    By.xpath(".//li[normalize-space(text())='Admin Group22']")
+    By.xpath(`.//li[normalize-space(text())='${selectedGroup}']`)
   );
   
   await driver.executeScript("arguments[0].scrollIntoView(true);", option);
