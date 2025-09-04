@@ -11,6 +11,9 @@ Feature: Add Service
     Then Choose a City
     Then Click on Save and Next
     Then Media and Description
+    Then Click on Just Date not time
+    Then Experience Start Time
+    Then Click on Add Avaibility
    
     
    

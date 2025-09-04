@@ -152,26 +152,186 @@ Then("Click on Save and Next", async function () {
   await driver.sleep(300);
 });
 
-Then("Media and Description", async function(){
-    const placeholder = await driver.wait(
-          until.elementLocated(
-            By.xpath(
-              "//div[@class='css-1jqq78o-placeholder' and normalize-space()='Select genres...']"
-            )
-          ),
-          10000
-        );
-    
-        const dropdownControls = await placeholder.findElement(
-          By.xpath("ancestor::div[contains(@class, 'css-13cymwt-control')]")
-        );
-    
-        await dropdownControls.click();
-        const firstOption = await driver.wait(
-          until.elementLocated(By.css("[id^='react-select'][id$='-option-0']")),
-          5000
-        );
-        await firstOption.click();
-        await driver.sleep(10000)
+Then("Media and Description", async function () {
+  const placeholder = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//div[@class='css-1jqq78o-placeholder' and normalize-space()='Select genres...']"
+      )
+    ),
+    10000
+  );
 
-})
+  const dropdownControls = await placeholder.findElement(
+    By.xpath("ancestor::div[contains(@class, 'css-13cymwt-control')]")
+  );
+
+  await dropdownControls.click();
+  const firstOption = await driver.wait(
+    until.elementLocated(By.css("[id^='react-select'][id$='-option-0']")),
+    5000
+  );
+  await firstOption.click();
+  await driver.sleep(300);
+
+  const button = await driver.findElement(
+    By.xpath("//button[normalize-space(text())='Save and Next']")
+  );
+  await button.click();
+  await driver.sleep(300);
+});
+
+Then("Click on Just Date not time", async function () {
+  const radio = await driver.findElement(
+    By.css("input[type='radio'][value='Only_Date']")
+  );
+  await radio.click();
+  await driver.sleep(300);
+  const button = await driver.findElement(
+    By.xpath("//button[normalize-space()='Save']")
+  );
+  await button.click();
+  await driver.sleep(300);
+  const buttons = await driver.findElement(
+    By.xpath("//button[normalize-space()='Save']")
+  );
+  await buttons.click();
+
+  await driver.sleep(500);
+});
+
+Then("Experience Start Time", async function () {
+  const addTimeButton = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//button[normalize-space(text())='Add Start - Time / Duration' and contains(@class, 'primary-btn')]"
+      )
+    ),
+    10000
+  );
+
+  await driver.wait(until.elementIsVisible(addTimeButton), 5000);
+  await driver.wait(until.elementIsEnabled(addTimeButton), 5000);
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    addTimeButton
+  );
+  await driver.sleep(200);
+
+  await addTimeButton.click();
+
+  // click on Start time
+  const checkInTimeInput = await driver.wait(
+    until.elementLocated(By.id("start-time")),
+    10000
+  );
+
+  await driver.wait(until.elementIsVisible(checkInTimeInput), 5000);
+  await driver.wait(until.elementIsEnabled(checkInTimeInput), 5000);
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    checkInTimeInput
+  );
+  await driver.sleep(200);
+  await checkInTimeInput.click();
+  await checkInTimeInput.sendKeys("10:30");
+
+  await driver.sleep(2000);
+
+  // Click on hour
+  const checkOutTimeInput = await driver.wait(
+    until.elementLocated(By.id("hour")),
+    10000
+  );
+
+  await driver.wait(until.elementIsVisible(checkOutTimeInput), 5000);
+  await driver.wait(until.elementIsEnabled(checkOutTimeInput), 5000);
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    checkOutTimeInput
+  );
+  await driver.sleep(200);
+  await checkOutTimeInput.click();
+  await checkOutTimeInput.sendKeys("10");
+
+  await driver.sleep(500);
+
+  const checkminuteInput = await driver.wait(
+    until.elementLocated(By.id("minutes")),
+    10000
+  );
+
+  await driver.wait(until.elementIsVisible(checkminuteInput), 5000);
+  await driver.wait(until.elementIsEnabled(checkminuteInput), 5000);
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    checkminuteInput
+  );
+  await driver.sleep(200);
+  await checkminuteInput.click();
+  await checkminuteInput.sendKeys("20");
+
+  await driver.sleep(500);
+
+  // click on save button
+  const saveButtons = await driver.wait(
+    until.elementLocated(By.css("button.modal-success-button")),
+    3000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    saveButtons
+  );
+
+  await saveButtons.click();
+
+  await driver.sleep(300);
+  const buttons = await driver.findElement(
+    By.xpath("//button[normalize-space()='Save']")
+  );
+  await buttons.click();
+  await driver.sleep(10000);
+});
+
+Then("Click on Add Avaibility", async function () {
+  const addAvailabilityBtn = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//button[normalize-space(text())='Add Availability' and contains(@class, 'primary-btn')]"
+      )
+    ),
+    10000
+  );
+
+  await driver.wait(until.elementIsVisible(addAvailabilityBtn), 5000);
+  await driver.wait(until.elementIsEnabled(addAvailabilityBtn), 5000);
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    addAvailabilityBtn
+  );
+  await driver.sleep(200);
+  await addAvailabilityBtn.click();
+  const dropdownInput = await driver.findElement(
+    By.xpath(
+      "//label[normalize-space()='Select the Type of Availability Rule']/following::input[1]"
+    )
+  );
+
+  await dropdownInput.click();
+
+  const firstOption = await driver.wait(
+    until.elementLocated(
+      By.xpath("//div[contains(@class,'menu')]//div[@role='option'][1]")
+    ),
+    5000
+  );
+
+  await firstOption.click();
+  await driver.sleep(10000);
+});
