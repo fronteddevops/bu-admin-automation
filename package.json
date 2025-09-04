@@ -6,7 +6,7 @@
     "test:cucumber": "cucumber-js features/adduser.feature --require features/step_definitions/adduser.steps.js --format json:reports/adduser_report.json",
     "report:cucumber": "node features/step_definitions/generateReport.js",
     "test:adduser": "cucumber-js features/adduser.feature --require features/step_definitions/adduser.steps.js --format json:reports/adduser_report.json",
-     "report:adduser": "node features/step_definitions/adduserReport.js",
+    "report:adduser": "node features/step_definitions/adduserReport.js",
     "report:tour": "node features/step_definitions/generateTourReport.js",
     "test:addtour": "cucumber-js features/tour.feature --require features/step_definitions/tour.steps.js --format json:reports/tour_report.json && npm run report:tour",
     "test:with-report": "npm run test:cucumber && npm run report:tour",
@@ -38,7 +38,6 @@
     "report:templatestatus": "node features/step_definitions/templatestatusReport.js",
     "test:selectboard": "cucumber-js features/selectboard.feature --require features/step_definitions/selectboard.steps.js --format json:reports/selectboard_report.json",
     "report:selectboard": "node features/step_definitions/selectboardReport.js"
-  
   },
   "keywords": [],
   "author": "",

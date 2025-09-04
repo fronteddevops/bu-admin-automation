@@ -28,7 +28,7 @@ Given(
   "I am logged in as admin Accommodation",
   { timeout: 180000 },
   async function () {
-    await driver.get("http://192.168.29.67:5173/kanban");
+    await driver.get("http://localhost:5173/");
 
     // Wait for email input to appear
     const emailInput = await driver.wait(

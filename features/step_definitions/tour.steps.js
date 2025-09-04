@@ -42,7 +42,7 @@ Given(
   "I am logged in as admin in tour",
   { timeout: 180000 },
   async function () {
-    await driver.get("http://192.168.29.67:5173/kanban");
+    await driver.get("http://localhost:5173/");
 
     // Wait for email input to appear
     const emailInput = await driver.wait(
@@ -1844,7 +1844,7 @@ When("Extra - Max Unit, Description, Advance Setting And Save", async function()
   await driver.sleep(1000)
 })
 
-When("Tasks & Resources - Add Title, Description, Time", async function(){
+When("Tasks & Resources - Add Title, Description, Time and Faq", async function(){
   const addTasksButton = await driver.wait(
     until.elementLocated(
       By.xpath("//button[@type='button' and contains(@class, 'primary-btn') and normalize-space(text())='Add Tasks']")
@@ -2011,6 +2011,54 @@ When("Tasks & Resources - Add Title, Description, Time", async function(){
   
   await saveAndNextButtonfaq.click();
 })
+
+When("Select Action and Activate", async function () {
+  let dropdownButton = await driver.wait(
+    until.elementLocated(
+      By.xpath("//button[contains(text(),'Select Action')]")
+    ),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView(true);",
+    dropdownButton
+  );
+  await driver.wait(until.elementIsVisible(dropdownButton), 5000);
+  await dropdownButton.click();
+
+  let firstItem = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//ul[@aria-labelledby='dropdownMenuButton1']//div[@class='dropdown-item' and normalize-space(text())='Active Product']"
+      )
+    ),
+    5000
+  );
+
+  await driver.wait(until.elementIsVisible(firstItem), 5000);
+  await firstItem.click();
+  await driver.sleep(500);
+  let accommodationButton = await driver.wait(
+    until.elementLocated(
+      By.xpath(
+        "//button[contains(@class, 'btn') and normalize-space(text())='Accommodation']"
+      )
+    ),
+    10000
+  );
+
+  await driver.executeScript(
+    "arguments[0].scrollIntoView({block: 'center'});",
+    accommodationButton
+  );
+
+  await driver.wait(until.elementIsVisible(accommodationButton), 5000);
+  await driver.wait(until.elementIsEnabled(accommodationButton), 5000);
+
+  await accommodationButton.click();
+  await driver.sleep(10000)
+});
 
 
 

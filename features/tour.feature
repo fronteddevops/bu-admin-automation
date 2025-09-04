@@ -32,6 +32,7 @@ Feature: Add Tour
     When Pricing - Enter Code, Title, Languages, Cancellation Policy, Start Time and Duration
     When Extra - Max Unit, Description, Advance Setting And Save
     When Tasks & Resources - Add Title, Description, Time and Faq
+    When Select Action and Activate
 
 
 
