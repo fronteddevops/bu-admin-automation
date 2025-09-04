@@ -38,7 +38,9 @@
     "report:templatestatus": "node features/step_definitions/templatestatusReport.js",
     "test:selectboard": "cucumber-js features/selectboard.feature --require features/step_definitions/selectboard.steps.js --format json:reports/selectboard_report.json",
     "report:selectboard": "node features/step_definitions/selectboardReport.js",
-      "test:addservice": "cucumber-js features/addservice.feature --require features/step_definitions/addservice.steps.js --format json:reports/selectboard_report.json"
+    "test:addservice": "cucumber-js features/addservice.feature --require features/step_definitions/addservice.steps.js --format json:reports/addservice_report.json",
+    "report:addservice": "node features/step_definitions/addserviceReport.js"
+
 
   },
   "keywords": [],
