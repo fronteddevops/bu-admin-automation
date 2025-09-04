@@ -71,7 +71,6 @@ Then("Click on Service", async function () {
 });
 
 // click on add service button
-
 Then("Click on Add Service", async function () {
   const button = await driver.wait(
     until.elementLocated(By.xpath("//button[contains(., 'Add Services')]")),
@@ -81,3 +80,28 @@ Then("Click on Add Service", async function () {
   await button.click();
   await driver.sleep(2000);
 });
+
+// Click on Accomodotion 
+
+Then("Click on Accomodotion", async function(){
+    const accommodationRadio = await driver.wait(
+        until.elementLocated(By.id("Accommodation")),
+        10000
+      );
+    
+      await driver.wait(until.elementIsVisible(accommodationRadio), 5000);
+      await driver.wait(until.elementIsEnabled(accommodationRadio), 5000);
+      await accommodationRadio.click();
+      await driver.sleep(2000);
+    
+      // Click on Yes Button
+      const yesButton = await driver.wait(
+        until.elementLocated(By.css("button.modal-success-button.btn.btn-primary")),
+        10000
+      );
+    
+      await driver.wait(until.elementIsVisible(yesButton), 5000);
+      await driver.wait(until.elementIsEnabled(yesButton), 5000);
+      await yesButton.click();
+      await driver.sleep(2000);
+})
