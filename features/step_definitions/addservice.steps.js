@@ -81,27 +81,97 @@ Then("Click on Add Service", async function () {
   await driver.sleep(2000);
 });
 
-// Click on Accomodotion 
+// Click on Accomodotion
+Then("Click on Accomodotion", async function () {
+  const accommodationRadio = await driver.wait(
+    until.elementLocated(By.id("Accommodation")),
+    10000
+  );
 
-Then("Click on Accomodotion", async function(){
-    const accommodationRadio = await driver.wait(
-        until.elementLocated(By.id("Accommodation")),
-        10000
-      );
+  await driver.wait(until.elementIsVisible(accommodationRadio), 5000);
+  await driver.wait(until.elementIsEnabled(accommodationRadio), 5000);
+  await accommodationRadio.click();
+  await driver.sleep(2000);
+
+  // Click on Yes Button
+  const yesButton = await driver.wait(
+    until.elementLocated(By.css("button.modal-success-button.btn.btn-primary")),
+    10000
+  );
+  await driver.wait(until.elementIsVisible(yesButton), 5000);
+  await driver.wait(until.elementIsEnabled(yesButton), 5000);
+  await yesButton.click();
+  await driver.sleep(2000);
+});
+
+// Enter Basic Code
+Then("Select Basic and Enter Experience code", async function () {
+  const codeInput = await driver.wait(
+    until.elementLocated(By.id("experienceCode")),
+    10000
+  );
+  await driver.wait(until.elementIsVisible(codeInput), 5000);
+  await codeInput.click();
+  await codeInput.sendKeys("exp-324");
+  await driver.sleep(4000);
+});
+
+// Choose a Country
+Then("Choose a Country", async function () {
+  const select = await driver.findElement(By.id("country-0"));
+  const option = await select.findElement(By.xpath("./option[3]"));
+  await option.click();
+  await driver.sleep(300);
+});
+
+Then("Choose a State", async function () {
+  const select = await driver.findElement(
+    By.xpath("//label[text()='Choose a State:']/following-sibling::select")
+  );
+  const option = await select.findElement(By.xpath("./option[2]"));
+  await option.click();
+  await driver.sleep(1000);
+});
+
+Then("Choose a City", async function () {
+  const select = await driver.findElement(
+    By.xpath("//label[text()='Choose a City:']/following-sibling::select")
+  );
+  const option = await select.findElement(By.xpath("./option[2]"));
+  await option.click();
+  await driver.sleep(300);
+});
+
+//click on Save and Next
+
+Then("Click on Save and Next", async function () {
+  const button = await driver.findElement(
+    By.xpath("//button[normalize-space(text())='Save and Next']")
+  );
+  await button.click();
+  await driver.sleep(300);
+});
+
+Then("Media and Description", async function(){
+    const placeholder = await driver.wait(
+          until.elementLocated(
+            By.xpath(
+              "//div[@class='css-1jqq78o-placeholder' and normalize-space()='Select genres...']"
+            )
+          ),
+          10000
+        );
     
-      await driver.wait(until.elementIsVisible(accommodationRadio), 5000);
-      await driver.wait(until.elementIsEnabled(accommodationRadio), 5000);
-      await accommodationRadio.click();
-      await driver.sleep(2000);
+        const dropdownControls = await placeholder.findElement(
+          By.xpath("ancestor::div[contains(@class, 'css-13cymwt-control')]")
+        );
     
-      // Click on Yes Button
-      const yesButton = await driver.wait(
-        until.elementLocated(By.css("button.modal-success-button.btn.btn-primary")),
-        10000
-      );
-    
-      await driver.wait(until.elementIsVisible(yesButton), 5000);
-      await driver.wait(until.elementIsEnabled(yesButton), 5000);
-      await yesButton.click();
-      await driver.sleep(2000);
+        await dropdownControls.click();
+        const firstOption = await driver.wait(
+          until.elementLocated(By.css("[id^='react-select'][id$='-option-0']")),
+          5000
+        );
+        await firstOption.click();
+        await driver.sleep(10000)
+
 })
