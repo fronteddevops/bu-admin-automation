@@ -891,59 +891,105 @@ Then("Pricing", async function () {
   );
   await firstOption.click();
 
-  await driver.actions().move({ x: 10, y: 10 }).click().perform();
+  // await driver.actions().move({ x: 10, y: 10 }).click().perform();
   await driver.sleep(10000);
 
   // cancellation policy
   try {
     // Wait until the label is present
     const labelca = await driver.wait(
-        until.elementLocated(By.xpath("//label[contains(text(),'Cancellation Policy')]")),
-        5000
+      until.elementLocated(
+        By.xpath("//label[contains(text(),'Cancellation Policy')]")
+      ),
+      5000
     );
 
-    const dropdownca = await labelca.findElement(By.xpath("following-sibling::div//input"));
+    const dropdownca = await labelca.findElement(
+      By.xpath("following-sibling::div//input")
+    );
     await dropdownca.click();
     await driver.sleep(500);
 
     try {
-        const firstOptionca = await driver.wait(
-            until.elementLocated(By.xpath("(//div[contains(@class,'css-17') or contains(@class,'option')])[1]")),
-            2000
-        );
-        await firstOptionca.click();
+      const firstOptionca = await driver.wait(
+        until.elementLocated(
+          By.xpath(
+            "(//div[contains(@class,'css-17') or contains(@class,'option')])[1]"
+          )
+        ),
+        2000
+      );
+      await firstOptionca.click();
     } catch (err) {
-        console.log("No options available for Cancellation Policy, skipping selection.");
+      console.log(
+        "No options available for Cancellation Policy, skipping selection."
+      );
     }
 
-    await driver.actions().move({ x: 10, y: 10 }).click().perform();
+    // await driver.actions().move({ x: 10, y: 10 }).click().perform();
     await driver.sleep(1000);
-
-} catch (err) {
+    await driver.executeScript("window.scrollBy(0, 500)");
+  } catch (err) {
     console.log("Cancellation Policy dropdown not found, skipping.");
-}
+    await driver.executeScript("window.scrollBy(0, 500)");
+  }
 
-  // Start Time and Duration
-  const startTimeLabel = await driver.findElement(
-    By.xpath("//label[text()='Start Time and Duration']")
-  );
-  const startTimeInput = await startTimeLabel.findElement(
-    By.xpath("following-sibling::div//input")
-  );
+  // Start Time and Duration .....................
+  // await driver.sleep(2000)
+  // await driver.executeScript("window.scrollBy(0, 500)");
+  // await driver.sleep(2000)
+  // const startTimeInput = await driver.wait(
+  //   until.elementLocated(By.css("#react-select-5-input")),
+  //   10000
+  // );
 
-  // Click to open the dropdown
-  await startTimeInput.click();
+  // await startTimeInput.click();
 
-  await driver.sleep(500);
+  // const firstStartTimeOption = await driver.wait(
+  //   until.elementLocated(By.xpath("(//div[@role='option'])[1]")),
+  //   5000
+  // );
 
-  const firstStartTimeOption = await driver.findElement(
-    By.xpath(
-      "(//div[contains(@class,'css-17') or contains(@class,'option')])[1]"
-    )
-  );
-  await firstStartTimeOption.click();
+  // await firstStartTimeOption.click();
 
-  await driver.actions().move({ x: 10, y: 10 }).click().perform();
+  try {
+    // Wait until the label is present
+    const labelca = await driver.wait(
+      until.elementLocated(
+        By.xpath("//label[contains(text(),'Start Time and Duration')]")
+      ),
+      5000
+    );
+
+    const dropdownca = await labelca.findElement(
+      By.xpath("following-sibling::div//input")
+    );
+    await dropdownca.click();
+    await driver.sleep(500);
+
+    try {
+      const firstOptionca = await driver.wait(
+        until.elementLocated(
+          By.xpath(
+            "(//div[contains(@class,'css-17') or contains(@class,'option')])[1]"
+          )
+        ),
+        2000
+      );
+      await firstOptionca.click();
+    } catch (err) {
+      console.log(
+        "No options available for Cancellation Policy, skipping selection."
+      );
+    }
+
+    // await driver.actions().move({ x: 10, y: 10 }).click().perform();
+    await driver.sleep(1000);
+    await driver.executeScript("window.scrollBy(0, 500)");
+  } catch (err) {
+    console.log("Cancellation Policy dropdown not found, skipping.");
+    await driver.executeScript("window.scrollBy(0, 500)");
+  }
 
   // click on checkbox
   const ageRangeCheckbox = await driver.findElement(
@@ -966,5 +1012,5 @@ Then("Pricing", async function () {
     console.log("Save and Next button not found or not clickable, skipping.");
   }
 
-  await driver.sleep(10000);
+  await driver.sleep(20000);
 });
