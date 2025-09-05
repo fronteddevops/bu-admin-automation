@@ -162,6 +162,7 @@ When('I add a new user {string} with email {string} and password {string} to the
   
   await driver.executeScript("arguments[0].scrollIntoView(true);", option);
   await option.click();
+  
   // Enter Name
   const nameLabel = await driver.wait(until.elementLocated(By.xpath("//label[normalize-space()='Name']")), 10000);
   const nameInput = await nameLabel.findElement(By.xpath("./following-sibling::input"));
@@ -169,6 +170,7 @@ When('I add a new user {string} with email {string} and password {string} to the
   await driver.sleep(300);
   await nameInput.clear();
   await nameInput.sendKeys(name);
+
   // Enter Email
   const emailLabel = await driver.wait(until.elementLocated(By.xpath("//label[normalize-space()='Email']")), 10000);
   const emailInputuser = await emailLabel.findElement(By.xpath("./following-sibling::input"));
@@ -176,12 +178,14 @@ When('I add a new user {string} with email {string} and password {string} to the
   await driver.sleep(300);
   await emailInputuser.clear();
   await emailInputuser.sendKeys(email);
+
   // Enter Password
   const passwordInputuser = await driver.wait(until.elementLocated(By.xpath("//input[@type='password' and @placeholder='Password']")), 10000);
   await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", passwordInputuser);
   await driver.sleep(300);
   await passwordInputuser.clear();
   await passwordInputuser.sendKeys(password);
+
   // Save
   const saveButton = await driver.wait(until.elementLocated(By.xpath("//button[contains(@class, 'modal-success-button') and normalize-space()='Save']")), 10000);
   await driver.executeScript("arguments[0].scrollIntoView({ block: 'center' });", saveButton);
@@ -195,8 +199,7 @@ When('I add a new user {string} with email {string} and password {string} to the
 });
 
 Then('the user should be added successfully', async function () {
-  
-  await driver.sleep(2000);
+    await driver.sleep(2000);
 });
 
 After(async function () {
