@@ -14,6 +14,15 @@ Feature: Add Service
     Then Click on Just Date not time
     Then Experience Start Time
     Then Click on Add Avaibility
+    Then Select Pickup
+    Then Select Drop
+    Then Click on Extra Button
+    Then Enter Title
+    Then Add Task
+    Then Important Info
+    Then Know Before you go
+    Then Route
+    Then Pricing
    
     
    
