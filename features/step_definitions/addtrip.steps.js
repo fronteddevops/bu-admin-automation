@@ -30,6 +30,7 @@ After(async function () {
 });
 
 Given("I am logged in For add trip", { timeout: 180000 }, async function () {
+  // await driver.get("http://192.168.29.131:5173/");
   await driver.get("http://192.168.29.67:5174/");
   const emailInput = await driver.wait(
     until.elementLocated(By.css("input[name='email'][placeholder='Email']")),

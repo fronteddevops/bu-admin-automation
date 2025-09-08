@@ -275,7 +275,6 @@ Then("Experience Start Time", async function () {
   await driver.sleep(200);
   await checkminuteInput.click();
   await checkminuteInput.sendKeys("20");
-
   await driver.sleep(500);
 
   // click on save button
@@ -390,7 +389,6 @@ Then("Click on Add Avaibility", async function () {
 
   await driver.wait(until.elementIsVisible(saveBtn), 5000);
   await saveBtn.click();
-
   // click save again
   const saveBtns = await driver.wait(
     until.elementLocated(
@@ -427,7 +425,6 @@ Then("Select Pickup", async function () {
   await driver.wait(until.elementIsVisible(firstOption), 5000);
   await firstOption.click();
   await driver.actions().move({ x: 10, y: 10 }).click().perform();
-
   await driver.sleep(300);
 });
 
@@ -493,7 +490,6 @@ Then("Enter Title", async function () {
   await driver.sleep(1000);
 
   // Max units per boxing
-
   const noMaxRadio = await driver.wait(
     until.elementLocated(By.id("noMax")),
     10000
@@ -505,7 +501,6 @@ Then("Enter Title", async function () {
   await driver.sleep(1000);
 
   // Enter description
-
   const descriptionBox = await driver.wait(
     until.elementLocated(
       By.xpath(
@@ -520,16 +515,13 @@ Then("Enter Title", async function () {
   await descriptionBox.sendKeys("This is my test description for automation.");
 
   // Advance Setting
-
   const commissionInput = await driver.wait(
     until.elementLocated(By.id("commissionGroup")),
     10000
   );
 
   await commissionInput.clear();
-
   await commissionInput.sendKeys("Test Commission Group");
-
   await driver.sleep(1000);
 
   // click on save button
@@ -698,7 +690,6 @@ Then("Important Info", async function () {
   );
 
   await dropdownInput1.click();
-
   const firstOption1 = await driver.wait(
     until.elementLocated(By.xpath(`//div[@role='option'][1]`)),
     10000
@@ -775,7 +766,6 @@ Then("Know Before you go", async function () {
   await driver.sleep(500);
 
   // Physical difficulty level
-
   const labelq = "Physical difficulty level";
 
   // 1. Click on the dropdown input to open options
@@ -800,9 +790,7 @@ Then("Know Before you go", async function () {
     15000
   );
   await firstOptionq.click();
-
   await driver.actions().move({ x: 10, y: 10 }).click().perform();
-
   await driver.sleep(1000);
 
   // select age limit
@@ -821,7 +809,6 @@ Then("Know Before you go", async function () {
     until.elementLocated(By.css("button.save-and-next-button")),
     10000
   );
-
   await saveNextButton.click();
   await driver.sleep(1000);
 });

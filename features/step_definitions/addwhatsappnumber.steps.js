@@ -158,7 +158,7 @@ When("Add Client Name", async function () {
         By.xpath(".//following::button[text()='Scan QR']")
       );
       await clickQr.click();
-      await driver.sleep(30000);
+      await driver.sleep(1000);
     }
   } catch (err) {
     console.log("Client not found in table. Showing alert.");

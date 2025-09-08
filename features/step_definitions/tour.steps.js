@@ -42,7 +42,7 @@ Given(
   "I am logged in as admin in tour",
   { timeout: 180000 },
   async function () {
-    await driver.get("http://localhost:5173/");
+    await driver.get("http://192.168.29.67:5174/");
 
     // Wait for email input to appear
     const emailInput = await driver.wait(
@@ -100,7 +100,6 @@ When("home page click tour add Product and select Tour", async function () {
 });
 
 // Fill Basic Info
-
 Then("Click on Basic Info", async function () {
   const tourRadio = await driver.findElement(
     By.xpath("//input[@type='radio' and @id='Tour' and @value='Tour']")

@@ -15,6 +15,7 @@ const clientName = "testingkanban";
 const emailToFind = "johnx4@example.com";
 const isExistingClient = false;
 setDefaultTimeout(120 * 1000);
+
 Before(async function () {
   driver = await new Builder().forBrowser("chrome").build();
   await driver.manage().window().maximize();
@@ -42,7 +43,6 @@ Given("I am logged for Board", { timeout: 180000 }, async function () {
   await driver.sleep(1000);
 
   // Enter Password
-
   const passwordLabel = await driver.wait(
     until.elementLocated(
       By.xpath("//label[normalize-space(text())='Password']")
@@ -89,7 +89,6 @@ When("Click on Add Board", async function () {
     10000
   );
   await addBoardElement.click();
-
   await driver.sleep(1000);
 });
 
