@@ -44,7 +44,6 @@ Given(
     await driver.sleep(1000);
 
     // Enter Password
-
     const passwordLabel = await driver.wait(
       until.elementLocated(
         By.xpath("//label[normalize-space(text())='Password']")
