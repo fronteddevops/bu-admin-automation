@@ -28,7 +28,8 @@ Given(
   "I am logged in as admin Accommodation",
   { timeout: 180000 },
   async function () {
-    await driver.get("http://192.168.29.67:5174/");
+    // await driver.get("http://192.168.29.67:5174/");
+    await driver.get("http://192.168.29.131:5173/")
 
     // Wait for email input to appear
     const emailInput = await driver.wait(
@@ -79,7 +80,6 @@ Then("Select Accommodation and Click on Add Products", async function () {
 
   await driver.wait(until.elementIsVisible(accommodationBtn), 5000);
   await accommodationBtn.click();
-
   await driver.sleep(2000);
 
   const addProductsBtn = await driver.wait(
@@ -382,7 +382,6 @@ When(
       5000
     );
     await firstOption.click();
-
     const downloadsFolder = path.join(os.homedir(), "Downloads");
     const imagePath = path.join(
       downloadsFolder,
@@ -437,40 +436,7 @@ When(
       By.css("[id^='react-select'][id$='-option-0']")
     );
     await optionage.click();
-
-    // What to Bring
-
-    //     const bringLabel = await driver.wait(
-    //   until.elementLocated(By.xpath("//label[contains(text(), 'What to Bring')]")),
-    //   10000
-    // )
-
-    // const containerages = await bringLabel.findElement(
-    //   By.xpath("ancestor::div[contains(@class, 'mb-3')]")
-    // );
-    //  await containerages.click();
-
-    // const selectBoxes = await containerages.findElement(
-    //   By.css(".css-13cymwt-control")
-    // );
-
-    // await driver.executeScript("arguments[0].scrollIntoView(true);", selectBoxes);
-    // await driver.sleep(500);
-    // await selectBoxes.click();
-
-    // await driver.wait(
-    //       until.elementLocated(By.css("[id^='react-select'][id$='-option-0']")),
-    //       5000
-    //     );
-    //     await driver.sleep(2000);
-
-    //     const optionbring = await driver.findElement(
-    //       By.css("[id^='react-select'][id$='-option-0']")
-    //     );
-    //     await optionbring.click();
-
-    // Cancellation Policy
-
+    
     const policyLabel = await driver.wait(
       until.elementLocated(
         By.xpath("//label[normalize-space()='Cancellation Policy']")
@@ -478,33 +444,23 @@ When(
       10000
     );
 
-    // Step 2: Find the parent container with class "mb-3"
     const containerpolicy = await policyLabel.findElement(
       By.xpath("ancestor::div[contains(@class, 'mb-3')]")
     );
 
-    // Step 3: Find and click the react-select control box
     const dropdownControlpolicy = await containerpolicy.findElement(
       By.css(".css-13cymwt-control")
     );
     await dropdownControlpolicy.click();
 
     await driver.sleep(1000);
-    // Step 4: Wait for dropdown input and focus
     const inputpolicy = await driver.wait(
       until.elementLocated(By.css("input[id^='react-select'][id$='-input']")),
       1000
     );
     await inputpolicy.click();
     await driver.sleep(1000);
-
-    // Step 5: Select the first option
-    // const firstOptionpolicy = await driver.wait(
-    //   until.elementLocated(By.css("[id^='react-select'][id$='-option-0']")),
-    //   5000
-    // );
-    // await firstOptionpolicy.click();
-
+  
     const childLabel = await driver.wait(
       until.elementLocated(
         By.xpath("//label[normalize-space(text())='Child']")
@@ -512,11 +468,8 @@ When(
       5000
     );
 
-    // Step 2: Find the input associated with the label (assuming same parent <div>)
     const parentDiv = await childLabel.findElement(By.xpath(".."));
     const childInput = await parentDiv.findElement(By.css("input"));
-
-    // Step 3: Click the input and type value
     await childInput.click();
     await childInput.clear();
     await childInput.sendKeys("2");
@@ -530,18 +483,15 @@ When(
       5000
     );
 
-    // Step 2: Find the input associated with the label (assuming same parent <div>)
     const smparentDiv = await smokingLabel.findElement(By.xpath(".."));
     const smchildInput = await smparentDiv.findElement(By.css("input"));
 
-    // Step 3: Click the input and type value
     await smchildInput.click();
     await smchildInput.clear();
     await smchildInput.sendKeys("No");
     await driver.sleep(4000);
 
     // Parties
-
     const partyLabel = await driver.wait(
       until.elementLocated(
         By.xpath("//label[normalize-space(text())='Parties']")
@@ -549,34 +499,28 @@ When(
       5000
     );
 
-    // Step 2: Find the input associated with the label (assuming same parent <div>)
     const partyparentDiv = await partyLabel.findElement(By.xpath(".."));
     const partychildInput = await partyparentDiv.findElement(By.css("input"));
 
-    // Step 3: Click the input and type value
     await partychildInput.click();
     await partychildInput.clear();
     await partychildInput.sendKeys("No");
     await driver.sleep(4000);
 
     // Pets
-
     const petsLabel = await driver.wait(
       until.elementLocated(By.xpath("//label[normalize-space(text())='Pets']")),
       5000
     );
 
-    // Step 2: Find the input associated with the label (assuming same parent <div>)
     const petsparentDiv = await petsLabel.findElement(By.xpath(".."));
     const petschildInput = await petsparentDiv.findElement(By.css("input"));
 
-    // Step 3: Click the input and type value
     await petschildInput.click();
     await petschildInput.clear();
     await petschildInput.sendKeys("No");
     await driver.sleep(4000);
 
-    // click save and next button
     const saveNextButton = await driver.wait(
       until.elementLocated(
         By.xpath("//button[normalize-space(text())='Save and Next']")
@@ -597,7 +541,7 @@ When(
   async function () {
     const Addbutton = await driver.wait(
       until.elementLocated(By.xpath("//button[contains(text(), 'Add Room')]")),
-      10000 // wait max 10 seconds
+      10000
     );
 
     await driver.wait(until.elementIsVisible(Addbutton), 5000);

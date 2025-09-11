@@ -45,7 +45,6 @@
     "test:addrental": "cucumber-js features/addrental.feature --require features/step_definitions/addrental.steps.js --format json:reports/addrental_report.json",
     "report:addrental": "node features/step_definitions/addrentalReport.js"
 
-
   },
   "keywords": [],
   "author": "",
