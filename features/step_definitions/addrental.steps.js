@@ -724,6 +724,8 @@ Then("Click on Add Avaibility", async function () {
   await driver.sleep(1000);
 });
 
+// 
+
 Then("Pickup and Drop-off",async function(){
   // Set up the flight Pickup Places
 const label = await driver.findElement(
@@ -745,7 +747,7 @@ const options = await driver.findElements(
 );
 
 if (options.length > 0) {
-  await options[2].click();
+  await options[1].click();
 } else {
   throw new Error("No options found for Pickup Places");
 }

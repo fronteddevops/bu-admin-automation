@@ -21,7 +21,7 @@ After(async function () {
 });
 
 Given('I am logged in as admin', { timeout: 180000 }, async function () {
-  await driver.get('http://localhost:5173/');
+  await driver.get('http://192.168.29.67:5174/');
   const emailInput = await driver.wait(until.elementLocated(By.css("input[name='email'][placeholder='Email']")), 500);
   await driver.wait(until.elementIsVisible(emailInput), 10000);
   await emailInput.click();
@@ -98,8 +98,8 @@ When('I create a new group {string} with permissions', async function (groupName
   await selectPermission("transfer-list", "Can create");
   await selectPermission("tripboard", "Can view");
   await selectPermission("carrental", "Not allowed");
-  await selectPermission("carrentalsearch", "Can view");
-  await selectPermission("flightssearch", "Can view");
+  await selectPermission("carrentalsearch", "Can create");
+  await selectPermission("flightssearch", "Can create");
   await selectPermission("carDetails/:id", "Can create");
   await selectPermission("carDetails", "Can create");
   await selectPermission("add-suppliers-list", "Can view");
@@ -108,7 +108,7 @@ When('I create a new group {string} with permissions', async function (groupName
   await selectPermission("kanban", "Can view");
   await driver.sleep(5000);
   await selectPermission("day-tour-list", "Can view");
-  await selectPermission("create-booking", "Can view");
+  await selectPermission("create-booking", "Can create");
   await selectPermission("dailyDepartures", "Can view");
   await selectPermission("bookingDesk", "Not allowed");
   await selectPermission("salesFeed", "Can view");
@@ -120,7 +120,7 @@ When('I create a new group {string} with permissions', async function (groupName
   await selectPermission("rental/:id", "Can view");
   await selectPermission("transfer/:id", "Can create");
   await selectPermission("flight/:id", "Can view");
-  await selectPermission("accomodation/:id", "Can view");
+  // await selectPermission("accomodation/:id", "Can view");
   await selectPermission("tripboard/:id", "Can view");
   await driver.sleep(2000);
   const saveButtonOption = await driver.wait(until.elementLocated(By.xpath("//button[contains(@class, 'modal-success-button') and normalize-space()='save']")), 10000);

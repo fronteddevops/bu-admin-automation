@@ -28,7 +28,7 @@ Given(
   { timeout: 180000 },
   async function () {
     await driver.get(
-      "http://kanban-atpl-dev.s3-website.ap-south-1.amazonaws.com/login"
+      "http://192.168.29.67:5174/"
     );
 
     const selectEmail = await driver.wait(
