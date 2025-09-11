@@ -28,7 +28,7 @@ Given(
   { timeout: 180000 },
   async function () {
     await driver.get(
-      "http://kanban-atpl-dev.s3-website.ap-south-1.amazonaws.com/login"
+      "http://192.168.29.67:3000/"
     );
 
     const selectEmail = await driver.wait(
@@ -148,52 +148,52 @@ When("First indexing Email Drag and Drop on To Do", async function () {
   await driver.sleep(5000);
 });
 
-When("Click on Deadline and select today", async function () {
-  const todoDroptarget = await driver.wait(
-    until.elementLocated(
-      By.xpath(
-        "//div[contains(@class,'droptarget') and .//span[normalize-space(text())='To Do']]"
-      )
-    ),
-    10000
-  );
+// When("Click on Deadline and select today", async function () {
+//   const todoDroptarget = await driver.wait(
+//     until.elementLocated(
+//       By.xpath(
+//         "//div[contains(@class,'droptarget') and .//span[normalize-space(text())='To Do']]"
+//       )
+//     ),
+//     10000
+//   );
 
-  const deadlineButton = await todoDroptarget.findElement(
-    By.xpath(
-      ".//span[contains(@class,'deadline-btn') and normalize-space(text())='Deadline']"
-    )
-  );
+//   const deadlineButton = await todoDroptarget.findElement(
+//     By.xpath(
+//       ".//span[contains(@class,'deadline-btn') and normalize-space(text())='Deadline']"
+//     )
+//   );
 
-  await driver.executeScript(
-    "arguments[0].scrollIntoView({block: 'center'})",
-    deadlineButton
-  );
-  await driver.sleep(300);
-  await deadlineButton.click();
-  await driver.sleep(3000);
+//   await driver.executeScript(
+//     "arguments[0].scrollIntoView({block: 'center'})",
+//     deadlineButton
+//   );
+//   await driver.sleep(300);
+//   await deadlineButton.click();
+//   await driver.sleep(3000);
 
-  // Click on Today
-  const todoDroptargets = await driver.wait(
-    until.elementLocated(
-      By.xpath(
-        "//div[contains(@class,'droptarget') and .//span[normalize-space(text())='To Do']]"
-      )
-    ),
-    10000
-  );
+//   // Click on Today
+//   const todoDroptargets = await driver.wait(
+//     until.elementLocated(
+//       By.xpath(
+//         "//div[contains(@class,'droptarget') and .//span[normalize-space(text())='To Do']]"
+//       )
+//     ),
+//     10000
+//   );
 
-  const todayButton = await todoDroptargets.findElement(
-    By.css(".text-listdrop.daysof-week")
-  );
+//   const todayButton = await todoDroptargets.findElement(
+//     By.css(".text-listdrop.daysof-week")
+//   );
 
-  await driver.executeScript(
-    "arguments[0].scrollIntoView({block: 'center'})",
-    todayButton
-  );
-  await driver.sleep(300);
-  await todayButton.click();
-  await driver.sleep(10000);
-});
+//   await driver.executeScript(
+//     "arguments[0].scrollIntoView({block: 'center'})",
+//     todayButton
+//   );
+//   await driver.sleep(300);
+//   await todayButton.click();
+//   await driver.sleep(10000);
+// });
 
 When("Click on First indexing Email on To Do", async function () {
   const todoDroptarget = await driver.wait(

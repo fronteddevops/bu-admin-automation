@@ -13,7 +13,7 @@ const chromedriver = require("chromedriver");
 let driver;
 const clientName = "testingkanban";
 
-const emailToFind = "johnx4@example.com";
+const emailToFind = "admin@example.com";
 const isExistingClient = false;
 setDefaultTimeout(120 * 1000);
 Before(async function () {
@@ -28,7 +28,7 @@ After(async function () {
 });
 
 Given("I am logged", { timeout: 180000 }, async function () {
-  await driver.get("http://localhost:3000");
+  await driver.get("http://192.168.29.67:3000/");
 
   const selectEmail = await driver.wait(
     until.elementLocated(
@@ -105,7 +105,7 @@ When("Click on Add Button", async function () {
       await driver.wait(until.elementIsVisible(addButton), 2000);
       await driver.wait(until.elementIsEnabled(addButton), 2000);
       await addButton.click();
-      await driver.sleep(2000);
+      await driver.sleep(20000);
       // console.log(`Clicked add button for ${emailToFind}`);
 
       break;

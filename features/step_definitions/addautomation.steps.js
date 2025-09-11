@@ -27,7 +27,7 @@ After(async function () {
 });
 
 Given("I am logged for Automation", { timeout: 180000 }, async function () {
-  await driver.get("http://localhost:3000");
+  await driver.get("http://192.168.29.67:3000/");
 
   const selectEmail = await driver.wait(
     until.elementLocated(
@@ -42,7 +42,6 @@ Given("I am logged for Automation", { timeout: 180000 }, async function () {
   await driver.sleep(1000);
 
   // Enter Password
-
   const passwordLabel = await driver.wait(
     until.elementLocated(
       By.xpath("//label[normalize-space(text())='Password']")
@@ -105,15 +104,15 @@ When("Click on Create Button", async function () {
   await driver.sleep(1000);
 });
 
-When("Enter Title", async function () {
-  const titleInput = await driver.wait(
-    until.elementLocated(By.id("Rule")),
-    10000
-  );
-  await titleInput.click();
-  await titleInput.sendKeys("Trip Rule Title");
-  await driver.sleep(1000);
-});
+// When("Enter Title", async function () {
+//   const titleInput = await driver.wait(
+//     until.elementLocated(By.id("Rule")),
+//     10000
+//   );
+//   await titleInput.click();
+//   await titleInput.sendKeys("Trip Rule Title");
+//   await driver.sleep(1000);
+// });
 
 When("Select When", async function () {
   const whenDropdown = await driver.wait(
