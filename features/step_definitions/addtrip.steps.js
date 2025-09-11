@@ -78,7 +78,6 @@ Then("Click on Trip", async function () {
   await driver.sleep(1000);
 
   // click on Add Trip
-
   const addTripButton = await driver.findElement(
     By.xpath("//button[contains(., 'Add Trip')]")
   );
@@ -105,7 +104,6 @@ Then("Add Trip", async function () {
     By.css(".rmsc .dropdown-container")
   );
   await dropdown.click();
-
   await driver.wait(until.elementLocated(By.css(".rmsc .options")), 10000);
 
   const checkboxes = await driver.findElements(
@@ -191,7 +189,6 @@ Then("Add Trip", async function () {
   const dateToSelectdateEnd = await driver.findElement(
     By.xpath("//div[contains(@class,'react-datepicker__day') and text()='10']")
   );
-
   await dateToSelectdateEnd.click();
 
   // Select Status
@@ -270,9 +267,8 @@ Then("Add Trip", async function () {
   const nextButton = await driver.findElement(
     By.xpath("//button[normalize-space(text())='Next']")
   );
-
   await nextButton.click();
-  await driver.sleep(20000);
+  await driver.sleep(1000);
 });
 
 Then("add trip drap and drop", async function(){
@@ -288,4 +284,5 @@ Then("add trip drap and drop", async function(){
 } catch (error) {
   console.error("Drag and drop failed:", error);
 }
+await driver.sleep(10000)
 })

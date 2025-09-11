@@ -250,7 +250,7 @@ Then("Select Categories That Describe Experience", async function () {
   // Step 1: Locate the label
   const label = await driver.wait(
     until.elementLocated(
-      By.xpath("//label[contains(normalize-space(.), 'Categories')]")
+      By.xpath("//label[normalize-space(text())='Choose the Categories that best describe your Experience']")
     ),
     10000
   );
@@ -260,24 +260,30 @@ Then("Select Categories That Describe Experience", async function () {
     By.xpath("ancestor::div[contains(@class, 'mb-3')]")
   );
 
-  // Step 3: Find the input inside react-select
+  // Step 3: Find the react-select input
   const input = await container.findElement(
     By.css("input[id^='react-select'][id$='-input']")
   );
 
-  // Step 4: Scroll into view and click to focus
+  // Step 4: Scroll into view and click
   await driver.executeScript("arguments[0].scrollIntoView({block: 'center'});", input);
-  await driver.sleep(500);
   await input.click();
+  await driver.sleep(500);
 
-  // Step 5: Select the first two options via ARROW_DOWN + ENTER
-  await input.sendKeys(Key.ARROW_DOWN);
-  await driver.sleep(1000);
-  await input.sendKeys(Key.ENTER);
-  await input.sendKeys(Key.ARROW_DOWN);
-  await driver.sleep(1000);
-  await input.sendKeys(Key.ENTER);
-  await driver.sleep(1000);
+  // Step 5: Wait for dropdown menu to appear
+  const menu = await driver.wait(
+    until.elementLocated(By.css("div[id^='react-select'][id$='-listbox']")),
+    5000
+  );
+
+  // Step 6: Select first two options
+  const options = await menu.findElements(By.css("div[id^='react-select'][id*='-option']"));
+  if (options.length >= 2) {
+    await options[0].click();
+    await driver.sleep(500);
+    await input.click(); // reopen menu
+    await options[1].click();
+  }
 });
 
 
@@ -666,12 +672,7 @@ if (options.length > 0) {
 } else {
   throw new Error("No options found for Pickup Places");
 }
-
 await driver.sleep(10000)
-
 // Set up the flight Drop-Off Places
-
-
-
  
 })
